@@ -1,13 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const PhoneCode = () => {
   return (
     <section className="register-visitor">
       <div className="container">
         <div className="register-visitor__inner">
-          <a
+          <Link
+            to="/"
             className="register-visitor__logo register-visitor__logo--login logo"
-            href="#"
           >
             <img
               src="img/logo.svg"
@@ -15,7 +16,7 @@ const PhoneCode = () => {
               width="135"
               height="59"
             />
-          </a>
+          </Link>
           <form className="register-form" action="#">
             <div className="register-form__inner">
               <div className="register-form__group">
@@ -38,15 +39,15 @@ const PhoneCode = () => {
               Далее
             </button>
             <div className="register-form__links">
-              <a className="register-form__link" href="#">
+              <Link to="/auth/signup" className="register-form__link">
                 Нет аккаунта?{' '}
-              </a>
-              <a
+              </Link>
+              <Link
+                to="/auth/signup"
                 className="register-form__link register-form__link--register"
-                href="#"
               >
                 Зарегистрироваться
-              </a>
+              </Link>
             </div>
           </form>
         </div>

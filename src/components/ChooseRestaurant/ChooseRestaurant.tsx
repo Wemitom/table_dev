@@ -4,8 +4,6 @@ import {
   ChooseRestarauntAction,
   ChooseRestarauntActionType,
   ChooseRestaurantState,
-  MapAction,
-  MapState,
   RestarauntInfo,
 } from './interfaces';
 import { YMaps, Map, ListBox, ListBoxItem } from '@pbe/react-yandex-maps';
@@ -52,10 +50,10 @@ const ChooseRestaurant = () => {
     }
   };
 
-  const [state, dispatch] = useReducer(reducer, initState);
-  const [mapState, setMapState] = useState(initStateMap);
-  const [restarauntInfo, setRestarauntInfo] = useState<RestarauntInfo[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [state, dispatch] = useReducer(reducer, initState); // Состояние с параметрами поиска, выбранными юзером
+  const [mapState, setMapState] = useState(initStateMap); // Состояние карты (центр и зум)
+  const [restarauntInfo, setRestarauntInfo] = useState<RestarauntInfo[]>([]); // Массив информации о найденных ресторанах
+  const [loading, setLoading] = useState(false); // Выполняется ли запрос?
 
   const fetch = useMemo(
     () =>
@@ -100,8 +98,9 @@ const ChooseRestaurant = () => {
                         : 'Выберите параметры',
                     }}
                   >
-                    {restarauntInfo.map((info) => (
+                    {restarauntInfo.map((info, index) => (
                       <ListBoxItem
+                        key={`lst_itm${index}`}
                         data={{ content: info.name }}
                         options={{ selectOnClick: false }}
                         onClick={() =>

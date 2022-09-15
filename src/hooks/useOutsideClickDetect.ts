@@ -6,6 +6,7 @@ function isNode(event: EventTarget | null): asserts event is Node {
   }
 }
 
+// Хук для выполнения функции по клику снаружи div. На вход - ref на div; Функция, выполняемая по клику.
 const useOutsideClickDetect = (
   ref: MutableRefObject<HTMLDivElement | null>,
   func: Function
@@ -22,7 +23,7 @@ const useOutsideClickDetect = (
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [ref]);
+  }, [ref, func]);
 };
 
 export default useOutsideClickDetect;

@@ -1,37 +1,38 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
     <footer className="footer">
       <section className="section-access">
         <div className="section-access__inner">
-          <a
+          <Link
+            to="/for-partners"
             className="section-access__link"
-            href="#"
             style={{ backgroundImage: 'url(img/access-img/img1.jpg)' }}
           >
             <p className="section-access__text title">Для партнеров</p>
-          </a>
-          <a
+          </Link>
+          <Link
+            to="/for-clients"
             className="section-access__link"
-            href="#"
             style={{ backgroundImage: 'url(img/access-img/img2.jpg)' }}
           >
             <p className="section-access__text title">Для пользователей</p>
-          </a>
+          </Link>
         </div>
       </section>
       <div className="footer__inner">
         <div className="footer__info">
           <div className="footer__container">
-            <a className="logo footer__logo" href="#">
+            <Link to="/" className="logo footer__logo">
               <img
                 src="img/logo.svg"
                 alt="Логотип ресторана"
                 width="135"
                 height="59"
               />
-            </a>
+            </Link>
             <div className="footer__contacts">
               <a className="footer__link" href="mailto:totable.info@gmail.com">
                 totable.info@gmail.com
@@ -42,19 +43,19 @@ const Footer = () => {
             </div>
             <ul className="socials list-reset">
               <li className="socials__item">
-                <a className="socials__link socials__link--vk" href="#">
+                <Link to="#" className="socials__link socials__link--vk">
                   <span className="visually-hidden">ВК</span>
-                </a>
+                </Link>
               </li>
               <li className="socials__item">
-                <a className="socials__link socials__link--telegram" href="#">
+                <Link to="#" className="socials__link socials__link--telegram">
                   <span className="visually-hidden">Телеграм</span>
-                </a>
+                </Link>
               </li>
               <li className="socials__item">
-                <a className="socials__link socials__link--od" href="#">
+                <Link to="#" className="socials__link socials__link--od">
                   <span className="visually-hidden">Одноклассники</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

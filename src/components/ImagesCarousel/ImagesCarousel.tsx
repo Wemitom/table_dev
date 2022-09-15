@@ -8,6 +8,7 @@ const ImagesCarousel = ({ slides }: { slides: Slide[] }) => {
 
   useEffect(() => {
     const changeWidth = () => setWidth(window.innerWidth);
+    // Ставим эвент листенер на измение ширины, т.к. влияет на переключение слайдов
     window.addEventListener('resize', changeWidth);
 
     return () => {

@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import axios, { AxiosResponse } from 'axios';
 import { SearchData } from './interfaces';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [menuExpanded, setMenuExpanded] = useState(false);
@@ -24,6 +25,8 @@ const Header = () => {
   );
 
   useEffect(() => {
+    let active = true;
+
     if (searchQuery === '') {
       setAutoCompleteOptions([]);
       return undefined;
@@ -33,10 +36,12 @@ const Header = () => {
     fetch(
       { input: searchQuery, returnCount: 10 },
       (results?: AxiosResponse) => {
-        if (results) {
-          setAutoCompleteOptions([...(results.data as string[])]);
+        if (active) {
+          if (results) {
+            setAutoCompleteOptions([...(results.data as string[])]);
+          }
+          setLoading(false);
         }
-        setLoading(false);
       }
     );
   }, [searchQuery, fetch]);
@@ -45,14 +50,14 @@ const Header = () => {
     <header className="header">
       <div className="container">
         <nav className="header__inner">
-          <a className="header__logo logo" href="#">
+          <Link to="/" className="header__logo logo">
             <img
               src="../img/logo.svg"
               alt="Логотип ресторана"
               width="135"
               height="59"
             />
-          </a>
+          </Link>
           <SearchBar
             value={searchQuery}
             setValue={(value) => setSearchQuery(value)}
@@ -75,24 +80,24 @@ const Header = () => {
             data-menu
           >
             <li className="menu__item" data-menu-item>
-              <a className="menu__link" href="#">
+              <Link to="/for-partners" className="menu__link">
                 для партнеров
-              </a>
+              </Link>
             </li>
             <li className="menu__item" data-menu-item>
-              <a className="menu__link" href="#">
+              <Link to="/contacts" className="menu__link">
                 Контакты
-              </a>
+              </Link>
             </li>
             <li className="menu__item" data-menu-item>
-              <a className="menu__link" href="#">
+              <Link to="/auth/login" className="menu__link">
                 войти
-              </a>
+              </Link>
             </li>
             <li className="menu__item" data-menu-item>
-              <a className="menu__link" href="#">
+              <Link to="/auth/signup" className="menu__link">
                 зарегистрироваться
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

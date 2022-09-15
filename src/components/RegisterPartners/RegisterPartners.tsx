@@ -1,16 +1,18 @@
+import { Link } from 'react-router-dom';
+
 const RegisterPartners = () => {
   return (
     <section className="register-visitor">
       <div className="container">
         <div className="register-visitor__inner">
-          <a className="register-visitor__logo logo" href="#">
+          <Link to="/" className="register-visitor__logo logo">
             <img
-              src="img/logo.svg"
+              src="../img/logo.svg"
               alt="Логотип ресторана"
               width="135"
               height="59"
             />
-          </a>
+          </Link>
           <form className="register-form" action="#">
             <div className="register-form__inner">
               <div className="register-form__group">
@@ -70,8 +72,9 @@ const RegisterPartners = () => {
             </button>
             <p className="register-form__text">
               Нажимая «Зарегистрироваться», вы соглашаетесь с 
-              <a href="#">Условиями использования</a> и подтверждаете прочтение
-              <a href="#"> Политики конфиденциальности.</a>
+              <Link to="#">Условиями использования</Link> и подтверждаете
+              прочтение
+              <Link to="#"> Политики конфиденциальности.</Link>
             </p>
           </form>
         </div>

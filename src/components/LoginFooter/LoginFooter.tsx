@@ -1,16 +1,18 @@
+import { Link } from 'react-router-dom';
+
 const LoginFooter = () => {
   return (
     <footer className="footer-register">
       <div className="container">
         <div className="footer-register__top">
-          <a className="footer-register__logo logo" href="#">
+          <Link to="/" className="footer-register__logo logo">
             <img
-              src="img/logo.svg"
+              src="../img/logo.svg"
               alt="Логотип ресторана"
               width="81"
               height="35"
             />
-          </a>
+          </Link>
         </div>
         <div className="footer-register__bottom">
           <a

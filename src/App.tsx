@@ -1,49 +1,33 @@
-import Applications from './components/Applications/Applications';
-import BookingCanceled from './components/BookingCanceled/BookingCanceled';
-import ChooseRestaurant from './components/ChooseRestaurant/ChooseRestaurant';
-import Favorite from './components/Favorite/Favorite';
-import Favorites from './components/Favorites/Favorites';
+import { Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer/Footer';
 import ForPartners from './components/ForPartners/ForPartners';
-import GuestAssessment from './components/GuestAssessment/GuestAssessment';
-import Header from './components/Header/Header';
-import HostesProfile from './components/HostesProfile/HostesProfile';
-import ImagesCarousel from './components/ImagesCarousel/ImagesCarousel';
-import LoginFooter from './components/LoginFooter/LoginFooter';
-import LoginPartner from './components/LoginPartner/LoginPartner';
+import HeaderLayout from './components/Header/HeaderLayout';
+import Home from './components/Home/Home';
+import AuthLayout from './components/LoginFooter/AuthLayout';
 import LoginUser from './components/LoginUser/LoginUser';
-import PhoneCode from './components/PhoneCode/PhoneCode';
-import RegisterPartners from './components/RegisterPartners/RegisterPartners';
 import RegisterUser from './components/RegisterUser/RegisterUser';
-import RestaurantAssessment from './components/RestaurantAssessment/RestaurantAssessment';
-import RestaurantDescription from './components/RestaurantDescription/RestaurantDescription';
-import RestaurantInfo from './components/RestaurantInfo/RestaurantInfo';
-import ShortFooter from './components/ShortFooter/ShortFooter';
-import UserInfo from './components/UserInfo/UserInfo';
 
 function App() {
   return (
     <div className="wrapper">
       <div className="content">
-        <Header />
-        <ImagesCarousel
-          slides={[
-            {
-              imgPath: 'img/hero-bg/bg1.jpg',
-              title: 'Tottori',
-              description:
-                'Текст с описанием ресторана. Буквально 2 предложения. Желательно указать кухню',
-            },
-            {
-              imgPath: 'img/hero-bg/bg2.jpg',
-              title: 'Tottori',
-              description:
-                'Текст с описанием ресторана. Буквально 2 предложения. Желательно указать кухню',
-            },
-          ]}
-        />
-        <ChooseRestaurant />
-        <Footer />
+        <Routes>
+          <Route path="/auth" element={<AuthLayout />}>
+            <Route path="signup" element={<RegisterUser />} />
+            <Route path="login" element={<LoginUser />} />
+          </Route>
+          <Route path="/" element={<HeaderLayout />}>
+            <Route index element={<Home />} />
+            <Route
+              path="for-partners"
+              element={
+                <>
+                  <ForPartners /> <Footer />
+                </>
+              }
+            />
+          </Route>
+        </Routes>
       </div>
     </div>
   );
