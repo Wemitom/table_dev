@@ -4,6 +4,21 @@ export interface ChooseRestaurantState {
   cousine: string;
 }
 
+export interface MapState {
+  center: number[];
+  zoom: number;
+}
+
+export enum MapActionType {
+  Center = 'CENTER',
+  Zoom = 'ZOOM',
+}
+
+export interface MapAction {
+  type: MapActionType;
+  payload: string;
+}
+
 export enum ChooseRestarauntActionType {
   Area = 'AREA',
   Street = 'STREET',
@@ -13,4 +28,9 @@ export enum ChooseRestarauntActionType {
 export interface ChooseRestarauntAction {
   type: ChooseRestarauntActionType;
   payload: string;
+}
+
+export interface RestarauntInfo {
+  coords: number[];
+  name: string;
 }

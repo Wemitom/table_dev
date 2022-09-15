@@ -1089,7 +1089,7 @@ p {
 .choose-restaurant__map {
   margin-right: 90px;
 }
-.choose-restaurant__map img {
+.choose-restaurant__map__ymap {
   max-width: 600px;
   height: 500px;
 }
@@ -1098,7 +1098,7 @@ p {
     margin-right: 0;
     margin-bottom: 20px;
   }
-  .choose-restaurant__map img {
+  .choose-restaurant__map__ymap {
     height: 300px;
     max-width: 100%;
   }

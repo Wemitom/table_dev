@@ -4,7 +4,7 @@ import { Slide } from './interfaces';
 
 const ImagesCarousel = ({ slides }: { slides: Slide[] }) => {
   const [curSlide, setCurSlide] = useState(0);
-  const [width, setWidth] = useState(window.innerWidth);
+  const [, setWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     const changeWidth = () => setWidth(window.innerWidth);
