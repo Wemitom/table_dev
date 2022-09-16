@@ -34,6 +34,18 @@ const ImagesCarousel = ({ slides }: { slides: Slide[] }) => {
     };
   }, []);
 
+  // Ставим интервал в 15сек для автоматической прокрутки по слайдам
+  useEffect(() => {
+    const timer = setInterval(
+      () => curSlideDispatch({ type: CurSlideActionType.Next }),
+      15000
+    );
+
+    return () => {
+      timer && clearInterval(timer);
+    };
+  });
+
   return (
     <section className="hero-section">
       <h2 className="visually-hidden">слайдер с описанием кухни</h2>

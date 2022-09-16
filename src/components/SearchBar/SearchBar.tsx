@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import SimpleBar from 'simplebar-react';
 import useOutsideClickDetect from '../../hooks/useOutsideClickDetect';
 
 const SearchBar = ({
@@ -50,26 +51,33 @@ const SearchBar = ({
             }}
             data-simplebar
           >
-            {!loading ? (
-              autoCompleteOptions.length ? (
-                autoCompleteOptions.map((option) => (
-                  <li
-                    key={option}
-                    className="dropdown__list-item"
-                    onClick={() => {
-                      setValue(option);
-                      setOptionsExpanded(false);
-                    }}
-                  >
-                    {option}
-                  </li>
-                ))
+            <SimpleBar
+              style={{
+                height: '100%',
+              }}
+              autoHide
+            >
+              {!loading ? (
+                autoCompleteOptions.length ? (
+                  autoCompleteOptions.map((option) => (
+                    <li
+                      key={option}
+                      className="dropdown__list-item"
+                      onClick={() => {
+                        setValue(option);
+                        setOptionsExpanded(false);
+                      }}
+                    >
+                      {option}
+                    </li>
+                  ))
+                ) : (
+                  <li className="dropdown__list-item">Ничего не найдено</li>
+                )
               ) : (
-                <li className="dropdown__list-item">Ничего не найдено</li>
-              )
-            ) : (
-              <li className="dropdown__list-item">Загрузка...</li>
-            )}
+                <li className="dropdown__list-item">Загрузка...</li>
+              )}
+            </SimpleBar>
           </ul>
         )}
       </div>

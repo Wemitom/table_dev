@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import useOutsideClickDetect from '../../hooks/useOutsideClickDetect';
+import SimpleBar from 'simplebar-react';
 
 const DropdownList = ({
   value,
@@ -30,19 +31,26 @@ const DropdownList = ({
         }`}
         data-simplebar
       >
-        {options.map((option) => (
-          <li
-            key={option}
-            className="dropdown__list-item"
-            data-value="travel"
-            onClick={() => {
-              setValue(option);
-              setExpanded(false);
-            }}
-          >
-            {option}
-          </li>
-        ))}
+        <SimpleBar
+          style={{
+            height: '100%',
+          }}
+          autoHide
+        >
+          {options.map((option) => (
+            <li
+              key={option}
+              className="dropdown__list-item"
+              data-value="travel"
+              onClick={() => {
+                setValue(option);
+                setExpanded(false);
+              }}
+            >
+              {option}
+            </li>
+          ))}
+        </SimpleBar>
       </ul>
       <input
         type="text"

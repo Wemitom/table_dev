@@ -130,7 +130,17 @@ const ChooseRestaurant = () => {
                       payload: value,
                     })
                   }
-                  options={['басманный', 'замоскворечье', 'Арбат']}
+                  options={[
+                    'басманный',
+                    'замоскворечье',
+                    'Арбат',
+                    'A',
+                    'B',
+                    'C',
+                    'D',
+                    'E',
+                    'F',
+                  ]}
                 />
               </div>
               <div className="form-group">
