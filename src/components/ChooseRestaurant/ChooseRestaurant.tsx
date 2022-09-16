@@ -1,4 +1,4 @@
-import { useMemo, useReducer, useState } from 'react';
+import { useEffect, useMemo, useReducer, useState } from 'react';
 import DropdownList from '../DropdownList/DropdownList';
 import {
   ChooseRestarauntAction,
@@ -53,23 +53,20 @@ const ChooseRestaurant = () => {
   const [state, dispatch] = useReducer(reducer, initState); // Состояние с параметрами поиска, выбранными юзером
   const [mapState, setMapState] = useState(initStateMap); // Состояние карты (центр и зум)
   const [restarauntInfo, setRestarauntInfo] = useState<RestarauntInfo[]>([]); // Массив информации о найденных ресторанах
+  const [isMapSmaller, setIsMapSmaller] = useState(window.innerWidth > 640); // Надо ли менять высоту/ширину карты
   const [loading, setLoading] = useState(false); // Выполняется ли запрос?
 
   /* Мемоизируем функцию, т.к. используется в качестве параметра для useEffect.
      На вход - значения, которые пойдут в http запрос; колбек функция.
   */
-  const fetch = useMemo(
-    () =>
-      (
-        request: ChooseRestaurantState,
-        callback: (result?: AxiosResponse) => void
-      ) => {
-        axios
-          .get(`https://065006f9-c741-4430-bf2b-657758fe0973.mock.pstmn.io`)
-          .then(callback);
-      },
-    []
-  );
+  const fetch = (
+    request: ChooseRestaurantState,
+    callback: (result?: AxiosResponse) => void
+  ) => {
+    axios
+      .get(`https://065006f9-c741-4430-bf2b-657758fe0973.mock.pstmn.io`)
+      .then(callback);
+  };
 
   // По клику кнопки получаем значения с сервера
   const handleClick = () => {
@@ -82,6 +79,16 @@ const ChooseRestaurant = () => {
     });
   };
 
+  const isRerenderNeeded = () => setIsMapSmaller(window.innerWidth > 640);
+
+  useEffect(() => {
+    window.addEventListener('resize', isRerenderNeeded);
+
+    return () => {
+      window.removeEventListener('resize', isRerenderNeeded);
+    };
+  }, []);
+
   return (
     <section className="choose-restaurant">
       <div className="container">
@@ -92,8 +99,8 @@ const ChooseRestaurant = () => {
               <YMaps query={{ lang: 'ru_UA', mode: 'debug' }}>
                 <Map
                   state={mapState}
-                  height={window.innerWidth > 640 ? '500px' : '300px'}
-                  width={window.innerWidth > 640 ? '600px' : '360px'}
+                  height={isMapSmaller ? '500px' : '300px'}
+                  width={isMapSmaller ? '600px' : '360px'}
                 >
                   <ListBox
                     data={{
@@ -130,17 +137,7 @@ const ChooseRestaurant = () => {
                       payload: value,
                     })
                   }
-                  options={[
-                    'басманный',
-                    'замоскворечье',
-                    'Арбат',
-                    'A',
-                    'B',
-                    'C',
-                    'D',
-                    'E',
-                    'F',
-                  ]}
+                  options={['басманный', 'замоскворечье', 'Арбат']}
                 />
               </div>
               <div className="form-group">
