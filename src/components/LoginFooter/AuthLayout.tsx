@@ -13,7 +13,9 @@ const AuthLayout = () => {
 
   return (
     <>
-      <Outlet />
+      <div className="content">
+        <Outlet />
+      </div>
       <LoginFooter />
     </>
   );
