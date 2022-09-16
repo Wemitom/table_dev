@@ -55,6 +55,9 @@ const ChooseRestaurant = () => {
   const [restarauntInfo, setRestarauntInfo] = useState<RestarauntInfo[]>([]); // Массив информации о найденных ресторанах
   const [loading, setLoading] = useState(false); // Выполняется ли запрос?
 
+  /* Мемоизируем функцию, т.к. используется в качестве параметра для useEffect.
+     На вход - значения, которые пойдут в http запрос; колбек функция.
+  */
   const fetch = useMemo(
     () =>
       (
@@ -68,6 +71,7 @@ const ChooseRestaurant = () => {
     []
   );
 
+  // По клику кнопки получаем значения с сервера
   const handleClick = () => {
     setLoading(true);
     fetch(state, (results?: AxiosResponse) => {

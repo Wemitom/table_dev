@@ -7,7 +7,7 @@ const LoginFooter = () => {
         <div className="footer-register__top">
           <Link to="/" className="footer-register__logo logo">
             <img
-              src="../img/logo.svg"
+              src="/img/logo.svg"
               alt="Логотип ресторана"
               width="81"
               height="35"

@@ -9,26 +9,24 @@ import RegisterUser from './components/RegisterUser/RegisterUser';
 
 function App() {
   return (
-    <div className="wrapper">
-      <div className="content">
-        <Routes>
-          <Route path="/auth" element={<AuthLayout />}>
-            <Route path="signup" element={<RegisterUser />} />
-            <Route path="login" element={<LoginUser />} />
-          </Route>
-          <Route path="/" element={<HeaderLayout />}>
-            <Route index element={<Home />} />
-            <Route
-              path="for-partners"
-              element={
-                <>
-                  <ForPartners /> <Footer />
-                </>
-              }
-            />
-          </Route>
-        </Routes>
-      </div>
+    <div className="content">
+      <Routes>
+        <Route path="/auth" element={<AuthLayout />}>
+          <Route path="signup" element={<RegisterUser />} />
+          <Route path="login" element={<LoginUser />} />
+        </Route>
+        <Route path="/" element={<HeaderLayout />}>
+          <Route index element={<Home />} />
+          <Route
+            path="for-partners"
+            element={
+              <>
+                <ForPartners /> <Footer />
+              </>
+            }
+          />
+        </Route>
+      </Routes>
     </div>
   );
 }

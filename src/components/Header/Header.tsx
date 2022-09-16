@@ -46,6 +46,8 @@ const Header = () => {
     );
   }, [searchQuery, fetch]);
 
+  const closeMenu = () => setMenuExpanded(false);
+
   return (
     <header className="header">
       <div className="container">
@@ -79,22 +81,22 @@ const Header = () => {
             className={`menu list-reset${menuExpanded ? ' menu--active' : ''}`}
             data-menu
           >
-            <li className="menu__item" data-menu-item>
+            <li className="menu__item" data-menu-item onClick={closeMenu}>
               <Link to="/for-partners" className="menu__link">
                 для партнеров
               </Link>
             </li>
-            <li className="menu__item" data-menu-item>
+            <li className="menu__item" data-menu-item onClick={closeMenu}>
               <Link to="/contacts" className="menu__link">
                 Контакты
               </Link>
             </li>
-            <li className="menu__item" data-menu-item>
+            <li className="menu__item" data-menu-item onClick={closeMenu}>
               <Link to="/auth/login" className="menu__link">
                 войти
               </Link>
             </li>
-            <li className="menu__item" data-menu-item>
+            <li className="menu__item" data-menu-item onClick={closeMenu}>
               <Link to="/auth/signup" className="menu__link">
                 зарегистрироваться
               </Link>
