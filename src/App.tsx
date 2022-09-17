@@ -1,11 +1,12 @@
 import { Route, Routes } from 'react-router-dom';
+
 import Footer from './components/Footer/Footer';
 import ForPartners from './components/ForPartners/ForPartners';
 import HeaderLayout from './components/Header/HeaderLayout';
 import Home from './components/Home/Home';
 import AuthLayout from './components/LoginFooter/AuthLayout';
 import LoginUser from './components/LoginUser/LoginUser';
-import RegisterUser from './components/RegisterUser/RegisterUser';
+import RegisterUser from './components/SignupUser/SignupUser';
 
 function App() {
   return (
