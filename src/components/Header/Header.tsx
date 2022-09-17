@@ -1,9 +1,11 @@
-import { throttle } from 'lodash';
 import { useEffect, useMemo, useState } from 'react';
-import SearchBar from '../SearchBar/SearchBar';
+
 import axios, { AxiosResponse } from 'axios';
-import { SearchData } from './interfaces';
+import { throttle } from 'lodash';
 import { Link } from 'react-router-dom';
+
+import SearchBar from '../SearchBar/SearchBar';
+import { SearchData } from './interfaces';
 
 const Header = () => {
   const [menuExpanded, setMenuExpanded] = useState(false);
@@ -54,7 +56,7 @@ const Header = () => {
         <nav className="header__inner">
           <Link to="/" className="header__logo logo">
             <img
-              src="../img/logo.svg"
+              src="/img/logo.svg"
               alt="Логотип ресторана"
               width="135"
               height="59"

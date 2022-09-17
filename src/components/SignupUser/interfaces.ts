@@ -17,3 +17,10 @@ export const SignupSchema = Yup.object().shape({
     .email('Неверный email!')
     .required('Обязательно для заполнения'),
 });
+
+export interface SignupData {
+  firstName: string;
+  lastName: string;
+  phoneNum: string;
+  email: string;
+}

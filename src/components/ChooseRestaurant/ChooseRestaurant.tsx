@@ -1,14 +1,18 @@
-import { useEffect, useMemo, useReducer, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
+
+import CircularProgress from '@mui/material/CircularProgress/CircularProgress';
+import { YMaps, Map, ListBox, ListBoxItem } from '@pbe/react-yandex-maps';
+import axios, { AxiosResponse } from 'axios';
+
 import DropdownList from '../DropdownList/DropdownList';
+import Placemarks from '../Placemarks/Placemarks';
 import {
   ChooseRestarauntAction,
   ChooseRestarauntActionType,
   ChooseRestaurantState,
   RestarauntInfo,
 } from './interfaces';
-import { YMaps, Map, ListBox, ListBoxItem } from '@pbe/react-yandex-maps';
-import Placemarks from '../Placemarks/Placemarks';
-import axios, { AxiosResponse } from 'axios';
+import './ChooseRestaurant.css';
 
 const ChooseRestaurant = () => {
   const initState = {
@@ -16,7 +20,6 @@ const ChooseRestaurant = () => {
     street: 'ул. Маросейка',
     cousine: 'Японская',
   };
-
   const initStateMap = {
     center: [55.75, 37.57],
     zoom: 9,
@@ -95,7 +98,23 @@ const ChooseRestaurant = () => {
         <h2 className="choose-restaurant__title title">Подобрать ресторан</h2>
         <div className="choose-restaurant__inner">
           <div className="choose-restaurant__map">
-            <span>
+            <div>
+              <div
+                className="load__indicator"
+                style={{
+                  height: isMapSmaller ? '500px' : '300px',
+                  width: isMapSmaller ? '600px' : '360px',
+                  background: loading ? 'rgba(0, 0, 0, 0.3)' : undefined,
+                  zIndex: loading ? 2 : 0,
+                }}
+              >
+                {loading && (
+                  <CircularProgress
+                    style={{ color: 'white', position: 'absolute' }}
+                  />
+                )}
+              </div>
+
               <YMaps query={{ lang: 'ru_UA', mode: 'debug' }}>
                 <Map
                   state={mapState}
@@ -123,7 +142,7 @@ const ChooseRestaurant = () => {
                   <Placemarks restarauntInfo={restarauntInfo} />
                 </Map>
               </YMaps>
-            </span>
+            </div>
           </div>
           <div className="choose-restaurant__box">
             <div className="choose-restaurant__form">

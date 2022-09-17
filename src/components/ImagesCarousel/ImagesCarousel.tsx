@@ -1,6 +1,8 @@
 import { useEffect, useReducer, useState } from 'react';
-import { CurSlideAction, CurSlideActionType, Slide } from './interfaces';
+
 import { useSwipeable } from 'react-swipeable';
+
+import { CurSlideAction, CurSlideActionType, Slide } from './interfaces';
 
 const ImagesCarousel = ({ slides }: { slides: Slide[] }) => {
   const curSlideReducer = (state: number, action: CurSlideAction): number => {
@@ -19,6 +21,7 @@ const ImagesCarousel = ({ slides }: { slides: Slide[] }) => {
   const [curSlide, curSlideDispatch] = useReducer(curSlideReducer, 0);
   const [, setWidth] = useState(window.innerWidth);
 
+  // Хук для переключения между слайдами с помощью свайпа на телефоне
   const handlers = useSwipeable({
     onSwipedLeft: () => curSlideDispatch({ type: CurSlideActionType.Next }),
     onSwipedRight: () => curSlideDispatch({ type: CurSlideActionType.Prev }),
