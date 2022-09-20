@@ -31,6 +31,7 @@ const SignupUser = () => {
           })
         );
         dispatch(setUser(data.user!));
+        setSignupSuccessful(true);
       }
     });
   };

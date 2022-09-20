@@ -5,6 +5,7 @@ import { YMaps, Map, ListBox, ListBoxItem } from '@pbe/react-yandex-maps';
 import axios, { AxiosResponse } from 'axios';
 
 import DropdownList from '../DropdownList/DropdownList';
+import DropdownListSelect from '../DropdownListSelect/DropdownListSelect';
 import Placemarks from '../Placemarks/Placemarks';
 import {
   ChooseRestarauntAction,
@@ -19,7 +20,7 @@ const ChooseRestaurant = () => {
   const initState = {
     area: 'ЦАО',
     street: 'ул. Маросейка',
-    cuisine: 'Японская',
+    cuisine: [],
   };
   const initStateMap = {
     center: [55.75, 37.57],
@@ -33,21 +34,21 @@ const ChooseRestaurant = () => {
     switch (action.type) {
       case 'AREA':
         return {
-          area: action.payload,
+          area: action.payload as string,
           street: state.street,
           cuisine: state.cuisine,
         };
       case 'STREET':
         return {
           area: state.area,
-          street: action.payload,
+          street: action.payload as string,
           cuisine: state.cuisine,
         };
       case 'CUISINE':
         return {
           area: state.area,
           street: state.street,
-          cuisine: action.payload,
+          cuisine: action.payload as string[],
         };
       default:
         throw new Error();
@@ -169,7 +170,14 @@ const ChooseRestaurant = () => {
                       payload: value,
                     })
                   }
-                  options={['басманный', 'замоскворечье', 'Арбат']}
+                  options={[
+                    'басманный',
+                    'замоскворечье',
+                    'Арбат',
+                    'khamov',
+                    'taganka',
+                    'tver',
+                  ]}
                 />
               </div>
               <div className="form-group">
@@ -192,12 +200,12 @@ const ChooseRestaurant = () => {
               </div>
               <div className="form-group">
                 <p className="form-group__text">Кухня</p>
-                <DropdownList
-                  value={state.cuisine}
-                  setValue={(value) =>
+                <DropdownListSelect
+                  values={state.cuisine}
+                  setValues={(values) =>
                     dispatch({
                       type: ChooseRestarauntActionType.Cuisine,
-                      payload: value,
+                      payload: values,
                     })
                   }
                   options={[
@@ -205,6 +213,7 @@ const ChooseRestaurant = () => {
                     'Итальянская',
                     'Средиземноморская',
                     'Французская',
+                    'mix',
                   ]}
                 />
               </div>
