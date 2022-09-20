@@ -5,8 +5,10 @@ import { SignupData, SignupSchema } from '../SignupUser/interfaces';
 
 const SignupForm = ({
   handleSignup,
+  loading,
 }: {
   handleSignup: (values: SignupData) => void;
+  loading: boolean;
 }) => {
   const invalidInput = {
     border: '1px solid #f79191',
@@ -31,7 +33,9 @@ const SignupForm = ({
                 Имя
               </label>
               <Field
-                className="register-form__input input-reset"
+                className={`register-form__input input-reset${
+                  loading ? ' input--disabled' : ''
+                }`}
                 style={
                   errors.firstName && touched.firstName ? invalidInput : null
                 }
@@ -39,6 +43,7 @@ const SignupForm = ({
                 type="text"
                 name="firstName"
                 placeholder="Имя"
+                disabled={loading}
               />
               <ErrorMessage
                 name="firstName"
@@ -51,7 +56,9 @@ const SignupForm = ({
                 Фамилия
               </label>
               <Field
-                className="register-form__input input-reset"
+                className={`register-form__input input-reset${
+                  loading ? ' input--disabled' : ''
+                }`}
                 style={
                   errors.lastName && touched.lastName ? invalidInput : null
                 }
@@ -59,6 +66,7 @@ const SignupForm = ({
                 type="text"
                 name="lastName"
                 placeholder="Фамилия"
+                disabled={loading}
               />
               <ErrorMessage
                 name="lastName"
@@ -71,7 +79,9 @@ const SignupForm = ({
                 Телефон
               </label>
               <Field
-                className="register-form__input input-reset"
+                className={`register-form__input input-reset${
+                  loading ? ' input--disabled' : ''
+                }`}
                 style={
                   errors.phoneNum && touched.phoneNum ? invalidInput : null
                 }
@@ -79,6 +89,7 @@ const SignupForm = ({
                 type="tel"
                 name="phoneNum"
                 placeholder="+7(900) 123-45-67"
+                disabled={loading}
               />
               <ErrorMessage
                 name="phoneNum"
@@ -91,12 +102,15 @@ const SignupForm = ({
                 Электронная почта
               </label>
               <Field
-                className="register-form__input input-reset"
+                className={`register-form__input input-reset${
+                  loading ? ' input--disabled' : ''
+                }`}
                 style={errors.email && touched.email ? invalidInput : null}
                 id="email"
                 type="email"
                 name="email"
                 placeholder="example@example.com"
+                disabled={loading}
               />
               <ErrorMessage
                 name="email"
@@ -108,6 +122,7 @@ const SignupForm = ({
           <button
             className="register-form__btn main-btn btn-reset"
             type="submit"
+            disabled={loading}
           >
             Зарегистрироваться
           </button>

@@ -9,8 +9,9 @@ import Placemarks from '../Placemarks/Placemarks';
 import {
   ChooseRestarauntAction,
   ChooseRestarauntActionType,
+  ChooseRestarauntResult,
   ChooseRestaurantState,
-  RestarauntInfo,
+  RestarauntsInfo,
 } from './interfaces';
 import './ChooseRestaurant.css';
 
@@ -18,7 +19,7 @@ const ChooseRestaurant = () => {
   const initState = {
     area: 'ЦАО',
     street: 'ул. Маросейка',
-    cousine: 'Японская',
+    cuisine: 'Японская',
   };
   const initStateMap = {
     center: [55.75, 37.57],
@@ -34,19 +35,19 @@ const ChooseRestaurant = () => {
         return {
           area: action.payload,
           street: state.street,
-          cousine: state.cousine,
+          cuisine: state.cuisine,
         };
       case 'STREET':
         return {
           area: state.area,
           street: action.payload,
-          cousine: state.cousine,
+          cuisine: state.cuisine,
         };
-      case 'COUSINE':
+      case 'CUISINE':
         return {
           area: state.area,
           street: state.street,
-          cousine: action.payload,
+          cuisine: action.payload,
         };
       default:
         throw new Error();
@@ -55,7 +56,9 @@ const ChooseRestaurant = () => {
 
   const [state, dispatch] = useReducer(reducer, initState); // Состояние с параметрами поиска, выбранными юзером
   const [mapState, setMapState] = useState(initStateMap); // Состояние карты (центр и зум)
-  const [restarauntInfo, setRestarauntInfo] = useState<RestarauntInfo[]>([]); // Массив информации о найденных ресторанах
+  const [restarauntsResult, setRestarauntsResult] = useState<
+    ChooseRestarauntResult[]
+  >([]); // Массив информации о найденных ресторанах
   const [isMapSmaller, setIsMapSmaller] = useState(window.innerWidth > 640); // Надо ли менять высоту/ширину карты
   const [loading, setLoading] = useState(false); // Выполняется ли запрос?
 
@@ -67,7 +70,11 @@ const ChooseRestaurant = () => {
     callback: (result?: AxiosResponse) => void
   ) => {
     axios
-      .get(`https://065006f9-c741-4430-bf2b-657758fe0973.mock.pstmn.io`)
+      .post(`/api/v1/search_location`, {
+        district: request.area,
+        limit: 5,
+        cuisine: request.cuisine,
+      })
       .then(callback);
   };
 
@@ -76,7 +83,7 @@ const ChooseRestaurant = () => {
     setLoading(true);
     fetch(state, (results?: AxiosResponse) => {
       if (results) {
-        setRestarauntInfo([...(results.data as RestarauntInfo[])]);
+        setRestarauntsResult([...(results.data as RestarauntsInfo).result]);
       }
       setLoading(false);
     });
@@ -115,7 +122,7 @@ const ChooseRestaurant = () => {
                 )}
               </div>
 
-              <YMaps query={{ lang: 'ru_UA', mode: 'debug' }}>
+              <YMaps query={{ lang: 'ru_RU', mode: 'debug' }}>
                 <Map
                   state={mapState}
                   height={isMapSmaller ? '500px' : '300px'}
@@ -123,23 +130,29 @@ const ChooseRestaurant = () => {
                 >
                   <ListBox
                     data={{
-                      content: restarauntInfo.length
+                      content: restarauntsResult.length
                         ? 'Рестораны'
                         : 'Выберите параметры',
                     }}
                   >
-                    {restarauntInfo.map((info, index) => (
+                    {restarauntsResult.map((result, index) => (
                       <ListBoxItem
                         key={`lst_itm${index}`}
-                        data={{ content: info.name }}
+                        data={{ content: result.name }}
                         options={{ selectOnClick: false }}
                         onClick={() =>
-                          setMapState({ center: info.coords, zoom: 17 })
+                          setMapState({
+                            center: [
+                              +result.location_long,
+                              +result.location_lat,
+                            ],
+                            zoom: 17,
+                          })
                         }
                       />
                     ))}
                   </ListBox>
-                  <Placemarks restarauntInfo={restarauntInfo} />
+                  <Placemarks restarauntsResult={restarauntsResult} />
                 </Map>
               </YMaps>
             </div>
@@ -180,10 +193,10 @@ const ChooseRestaurant = () => {
               <div className="form-group">
                 <p className="form-group__text">Кухня</p>
                 <DropdownList
-                  value={state.cousine}
+                  value={state.cuisine}
                   setValue={(value) =>
                     dispatch({
-                      type: ChooseRestarauntActionType.Cousine,
+                      type: ChooseRestarauntActionType.Cuisine,
                       payload: value,
                     })
                   }

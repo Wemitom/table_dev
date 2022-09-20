@@ -7,7 +7,7 @@ const RegisterPartners = () => {
         <div className="register-visitor__inner">
           <Link to="/" className="register-visitor__logo logo">
             <img
-              src="../img/logo.svg"
+              src="img/logo.svg"
               alt="Логотип ресторана"
               width="135"
               height="59"

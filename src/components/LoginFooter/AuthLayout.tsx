@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+
+import { Link, Outlet } from 'react-router-dom';
+
 import LoginFooter from './LoginFooter';
 
 const AuthLayout = () => {
@@ -14,7 +16,21 @@ const AuthLayout = () => {
   return (
     <>
       <div className="content">
-        <Outlet />
+        <section className="register-visitor">
+          <div className="container">
+            <div className="register-visitor__inner">
+              <Link to="/" className="register-visitor__logo logo">
+                <img
+                  src="/img/logo.svg"
+                  alt="Логотип ресторана"
+                  width="135"
+                  height="59"
+                />
+              </Link>
+              <Outlet />
+            </div>
+          </div>
+        </section>
       </div>
       <LoginFooter />
     </>

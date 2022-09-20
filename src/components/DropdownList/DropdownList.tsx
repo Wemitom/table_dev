@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react';
-import useOutsideClickDetect from '../../hooks/useOutsideClickDetect';
+
 import SimpleBar from 'simplebar-react';
+
+import useOutsideClickDetect from '../../hooks/useOutsideClickDetect';
 
 const DropdownList = ({
   value,

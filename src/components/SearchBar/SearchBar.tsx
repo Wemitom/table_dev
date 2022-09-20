@@ -1,22 +1,59 @@
-import { useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
+import axios, { AxiosResponse } from 'axios';
+import { throttle } from 'lodash';
 import SimpleBar from 'simplebar-react';
 
 import useOutsideClickDetect from '../../hooks/useOutsideClickDetect';
+import {
+  AutoCompleteOption,
+  SearchData,
+  SearchResponse,
+} from '../Header/interfaces';
 
-const SearchBar = ({
-  value,
-  setValue,
-  autoCompleteOptions,
-  loading,
-}: {
-  value: string;
-  setValue: (value: string) => void;
-  autoCompleteOptions: string[];
-  loading: boolean;
-}) => {
+const SearchBar = () => {
   const [optionsExpanded, setOptionsExpanded] = useState(false);
   const wrapper = useRef(null);
+
+  const [searchQuery, setSearchQuery] = useState('');
+  const [autoCompleteOptions, setAutoCompleteOptions] = useState<
+    AutoCompleteOption[]
+  >([]);
+  const [loading, setLoading] = useState(false);
+
+  const fetch = useMemo(
+    () =>
+      throttle(
+        (request: SearchData, callback: (result?: AxiosResponse) => void) => {
+          axios.post(`/api/v1/search_by_name`, request).then(callback);
+        },
+        200
+      ),
+    []
+  );
+
+  useEffect(() => {
+    let active = true;
+
+    if (searchQuery === '') {
+      setAutoCompleteOptions([]);
+      return undefined;
+    }
+
+    setLoading(true);
+    fetch({ search: searchQuery, limit: 10 }, (results?: AxiosResponse) => {
+      if (active) {
+        if (results) {
+          setAutoCompleteOptions([...(results.data as SearchResponse).result]);
+        }
+        setLoading(false);
+      }
+    });
+
+    return () => {
+      active = false;
+    };
+  }, [searchQuery, fetch]);
 
   useOutsideClickDetect(wrapper, () => setOptionsExpanded(false));
 
@@ -36,9 +73,11 @@ const SearchBar = ({
           name="search"
           placeholder="Введите название"
           autoComplete="off"
-          value={value}
+          value={searchQuery}
           onFocus={() => setOptionsExpanded(true)}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => {
+            setSearchQuery(e.target.value);
+          }}
           required
         />
         {optionsExpanded && (
@@ -60,16 +99,16 @@ const SearchBar = ({
               autoHide
             >
               {autoCompleteOptions.length ? (
-                autoCompleteOptions.map((option) => (
+                autoCompleteOptions.map((option, index) => (
                   <li
-                    key={option}
+                    key={`option.name_${index}`}
                     className="dropdown__list-item"
                     onClick={() => {
-                      setValue(option);
+                      setSearchQuery(option.name);
                       setOptionsExpanded(false);
                     }}
                   >
-                    {option}
+                    {option.name}
                   </li>
                 ))
               ) : (

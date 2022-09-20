@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+
 import { useLocation } from 'react-router-dom';
 
 // Компонент, который при добавлении в роут вызовет скролл наверх страницы

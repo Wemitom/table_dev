@@ -40,7 +40,7 @@ html {
   color: #282828;
 }
 .page__body--decor {
-  background-image: url(./img/bg-decor.png);
+  background-image: url(img/bg-decor.png);
   background-repeat: no-repeat;
   background-position: bottom 5% right 20%;
 }
@@ -3128,16 +3128,16 @@ p {
   background-color: #909090;
 }
 .socials__link--vk {
-  -webkit-mask-image: url(./img/svg/icon-vk.svg);
-  mask-image: url(./img/svg/icon-vk.svg);
+  -webkit-mask-image: url(img/svg/icon-vk.svg);
+  mask-image: url(img/svg/icon-vk.svg);
 }
 .socials__link--telegram {
-  -webkit-mask-image: url(./img/svg/icon-telegram.svg);
-  mask-image: url(./img/svg/icon-telegram.svg);
+  -webkit-mask-image: url(img/svg/icon-telegram.svg);
+  mask-image: url(img/svg/icon-telegram.svg);
 }
 .socials__link--od {
-  -webkit-mask-image: url(./img/svg/icon-od.svg);
-  mask-image: url(./img/svg/icon-od.svg);
+  -webkit-mask-image: url(img/svg/icon-od.svg);
+  mask-image: url(img/svg/icon-od.svg);
 }
 .footer-form__input {
   display: block;
@@ -3169,7 +3169,7 @@ p {
   opacity: 1;
 }
 .footer-form__input--tel {
-  background-image: url(./img/svg/icon-long-arrow-right.svg);
+  background-image: url(img/svg/icon-long-arrow-right.svg);
   background-repeat: no-repeat;
   background-position: center right;
 }
@@ -3190,4 +3190,8 @@ p {
 .input-error {
   color: red;
   font-size: 14px;
+}
+
+.input--disabled {
+  background-color: rgba(40, 40, 40, 0.25);
 }

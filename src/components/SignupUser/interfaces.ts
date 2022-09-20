@@ -11,8 +11,8 @@ export const SignupSchema = Yup.object().shape({
     .max(50, 'Фамилия слишком длинная!')
     .required('Обязательно для заполнения'),
   phoneNum: Yup.string()
-    .phone('+7', false, 'Неверный телефон!')
-    .required('Обязательно для заполнения'),
+    .required('Обязательно для заполнения')
+    .phone('RU', true, 'Неверный телефон!'),
   email: Yup.string()
     .email('Неверный email!')
     .required('Обязательно для заполнения'),

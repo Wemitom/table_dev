@@ -11,7 +11,7 @@ import RegisterUser from './components/SignupUser/SignupUser';
 function App() {
   return (
     <Routes>
-      <Route path="/auth" element={<AuthLayout />}>
+      <Route path="/" element={<AuthLayout />}>
         <Route path="signup" element={<RegisterUser />} />
         <Route path="login" element={<LoginUser />} />
       </Route>

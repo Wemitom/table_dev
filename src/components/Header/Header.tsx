@@ -1,52 +1,17 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import axios, { AxiosResponse } from 'axios';
-import { throttle } from 'lodash';
 import { Link } from 'react-router-dom';
 
 import SearchBar from '../SearchBar/SearchBar';
-import { SearchData } from './interfaces';
 
 const Header = () => {
   const [menuExpanded, setMenuExpanded] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [autoCompleteOptions, setAutoCompleteOptions] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  const fetch = useMemo(
-    () =>
-      throttle(
-        (request: SearchData, callback: (result?: AxiosResponse) => void) => {
-          axios
-            .get(`https://9e2e80b2-4903-4347-b057-95b2b86e9283.mock.pstmn.io`)
-            .then(callback);
-        },
-        200
-      ),
-    []
-  );
 
   useEffect(() => {
-    let active = true;
-
-    if (searchQuery === '') {
-      setAutoCompleteOptions([]);
-      return undefined;
-    }
-
-    setLoading(true);
-    fetch(
-      { input: searchQuery, returnCount: 10 },
-      (results?: AxiosResponse) => {
-        if (active) {
-          if (results) {
-            setAutoCompleteOptions([...(results.data as string[])]);
-          }
-          setLoading(false);
-        }
-      }
-    );
-  }, [searchQuery, fetch]);
+    menuExpanded
+      ? document.body.classList.add('dis-scroll')
+      : document.body.classList.remove('dis-scroll');
+  }, [menuExpanded]);
 
   const closeMenu = () => setMenuExpanded(false);
 
@@ -62,12 +27,7 @@ const Header = () => {
               height="59"
             />
           </Link>
-          <SearchBar
-            value={searchQuery}
-            setValue={(value) => setSearchQuery(value)}
-            autoCompleteOptions={autoCompleteOptions}
-            loading={loading}
-          />
+          <SearchBar />
           <button
             className={`burger btn-reset${
               menuExpanded ? ' burger--active' : ''
@@ -94,12 +54,12 @@ const Header = () => {
               </Link>
             </li>
             <li className="menu__item" data-menu-item onClick={closeMenu}>
-              <Link to="/auth/login" className="menu__link">
+              <Link to="/login" className="menu__link">
                 войти
               </Link>
             </li>
             <li className="menu__item" data-menu-item onClick={closeMenu}>
-              <Link to="/auth/signup" className="menu__link">
+              <Link to="/signup" className="menu__link">
                 зарегистрироваться
               </Link>
             </li>

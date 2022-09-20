@@ -1,7 +1,7 @@
 export interface ChooseRestaurantState {
   area: string;
   street: string;
-  cousine: string;
+  cuisine: string;
 }
 
 export interface MapState {
@@ -22,7 +22,7 @@ export interface MapAction {
 export enum ChooseRestarauntActionType {
   Area = 'AREA',
   Street = 'STREET',
-  Cousine = 'COUSINE',
+  Cuisine = 'CUISINE',
 }
 
 export interface ChooseRestarauntAction {
@@ -30,7 +30,15 @@ export interface ChooseRestarauntAction {
   payload: string;
 }
 
-export interface RestarauntInfo {
-  coords: number[];
+export interface ChooseRestarauntResult {
   name: string;
+  cuisine: string[];
+  location_long: string;
+  location_lat: string;
+}
+
+export interface RestarauntsInfo {
+  result: ChooseRestarauntResult[];
+  limit: number;
+  size: number;
 }
