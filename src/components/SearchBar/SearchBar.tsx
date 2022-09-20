@@ -55,6 +55,14 @@ const SearchBar = () => {
     };
   }, [searchQuery, fetch]);
 
+  useEffect(() => {
+    if (autoCompleteOptions.length) {
+      setOptionsExpanded(true);
+    } else {
+      setOptionsExpanded(false);
+    }
+  }, [autoCompleteOptions]);
+
   useOutsideClickDetect(wrapper, () => setOptionsExpanded(false));
 
   return (
@@ -74,8 +82,12 @@ const SearchBar = () => {
           placeholder="Введите название"
           autoComplete="off"
           value={searchQuery}
-          onFocus={() => setOptionsExpanded(true)}
           onChange={(e) => {
+            if (autoCompleteOptions.length) {
+              setOptionsExpanded(true);
+            } else {
+              setOptionsExpanded(false);
+            }
             setSearchQuery(e.target.value);
           }}
           required
@@ -98,22 +110,18 @@ const SearchBar = () => {
               }}
               autoHide
             >
-              {autoCompleteOptions.length ? (
-                autoCompleteOptions.map((option, index) => (
-                  <li
-                    key={`option.name_${index}`}
-                    className="dropdown__list-item"
-                    onClick={() => {
-                      setSearchQuery(option.name);
-                      setOptionsExpanded(false);
-                    }}
-                  >
-                    {option.name}
-                  </li>
-                ))
-              ) : (
-                <li className="dropdown__list-item">Ничего не найдено</li>
-              )}
+              {autoCompleteOptions.map((option, index) => (
+                <li
+                  key={`option.name_${index}`}
+                  className="dropdown__list-item"
+                  onClick={() => {
+                    setSearchQuery(option.name);
+                    setOptionsExpanded(false);
+                  }}
+                >
+                  {option.name}
+                </li>
+              ))}
             </SimpleBar>
           </ul>
         )}
