@@ -7,7 +7,7 @@ export interface User {
 }
 
 export interface AuthState {
-  authToken: string | null;
+  accessToken: string | null;
   refreshToken: string | null;
   user: User | null;
 }

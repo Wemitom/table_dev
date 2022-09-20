@@ -82,6 +82,11 @@ const SearchBar = () => {
           placeholder="Введите название"
           autoComplete="off"
           value={searchQuery}
+          onFocus={() => {
+            if (autoCompleteOptions.length && searchQuery !== '') {
+              setOptionsExpanded(true);
+            }
+          }}
           onChange={(e) => {
             if (autoCompleteOptions.length) {
               setOptionsExpanded(true);

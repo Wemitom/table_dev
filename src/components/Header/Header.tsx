@@ -11,7 +11,11 @@ const Header = () => {
     menuExpanded
       ? document.body.classList.add('dis-scroll')
       : document.body.classList.remove('dis-scroll');
-  }, [menuExpanded]);
+
+    return () => {
+      document.body.classList.remove('dis-scroll');
+    };
+  }, []);
 
   const closeMenu = () => setMenuExpanded(false);
 

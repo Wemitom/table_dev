@@ -4,7 +4,7 @@ import { PayloadAction } from '@reduxjs/toolkit/dist/createAction';
 import { AuthState, User } from './interfaces';
 
 const initialState: AuthState = {
-  authToken: null,
+  accessToken: null,
   refreshToken: null,
   user: null,
 };
@@ -15,16 +15,16 @@ export const authSlice = createSlice({
   reducers: {
     setTokens: (
       state: AuthState,
-      action: PayloadAction<{ authToken: string; refreshToken: string }>
+      action: PayloadAction<{ accessToken: string; refreshToken: string }>
     ) => {
-      state.authToken = action.payload.authToken;
+      state.accessToken = action.payload.accessToken;
       state.refreshToken = action.payload.refreshToken;
     },
-    setUser: (state: AuthState, action: PayloadAction<{ user: User }>) => {
-      state.user = action.payload.user;
+    setUser: (state: AuthState, action: PayloadAction<User>) => {
+      state.user = action.payload;
     },
     logout: (state: AuthState) => {
-      state.authToken = null;
+      state.accessToken = null;
       state.refreshToken = null;
       state.user = null;
     },

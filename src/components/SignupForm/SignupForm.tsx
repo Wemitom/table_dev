@@ -1,3 +1,4 @@
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { Link } from 'react-router-dom';
 
@@ -6,9 +7,11 @@ import { SignupData, SignupSchema } from '../SignupUser/interfaces';
 const SignupForm = ({
   handleSignup,
   loading,
+  error,
 }: {
   handleSignup: (values: SignupData) => void;
   loading: boolean;
+  error: FetchBaseQueryError | undefined;
 }) => {
   const invalidInput = {
     border: '1px solid #f79191',
@@ -126,6 +129,11 @@ const SignupForm = ({
           >
             Зарегистрироваться
           </button>
+          {error && (
+            <p className="input-error" style={{ marginBottom: '0.5em' }}>
+              При регистрации произошла ошибка!
+            </p>
+          )}
           <p className="register-form__text">
             Нажимая «Зарегистрироваться», вы соглашаетесь с 
             <Link to="#">Условиями использования</Link>
