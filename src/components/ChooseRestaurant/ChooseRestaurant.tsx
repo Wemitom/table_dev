@@ -4,6 +4,7 @@ import CircularProgress from '@mui/material/CircularProgress/CircularProgress';
 import { YMaps, Map, ListBox, ListBoxItem } from '@pbe/react-yandex-maps';
 import axios, { AxiosResponse } from 'axios';
 
+import useLocalization from '../../hooks/useLocalization';
 import DropdownList from '../DropdownList/DropdownList';
 import DropdownListSelect from '../DropdownListSelect/DropdownListSelect';
 import Placemarks from '../Placemarks/Placemarks';
@@ -62,6 +63,7 @@ const ChooseRestaurant = () => {
   >([]); // Массив информации о найденных ресторанах
   const [isMapSmaller, setIsMapSmaller] = useState(window.innerWidth > 640); // Надо ли менять высоту/ширину карты
   const [loading, setLoading] = useState(false); // Выполняется ли запрос?
+  const { t } = useLocalization();
 
   /* Мемоизируем функцию, т.к. используется в качестве параметра для useEffect.
      На вход - значения, которые пойдут в http запрос; колбек функция.
@@ -103,7 +105,7 @@ const ChooseRestaurant = () => {
   return (
     <section className="choose-restaurant">
       <div className="container">
-        <h2 className="choose-restaurant__title title">Подобрать ресторан</h2>
+        <h2 className="choose-restaurant__title title">{t.findRestaurant}</h2>
         <div className="choose-restaurant__inner">
           <div className="choose-restaurant__map">
             <div>
@@ -161,7 +163,7 @@ const ChooseRestaurant = () => {
           <div className="choose-restaurant__box">
             <div className="choose-restaurant__form">
               <div className="form-group">
-                <p className="form-group__text">Район</p>
+                <p className="form-group__text">{t.district}</p>
                 <DropdownList
                   value={state.area}
                   setValue={(value) =>
@@ -181,7 +183,7 @@ const ChooseRestaurant = () => {
                 />
               </div>
               <div className="form-group">
-                <p className="form-group__text">Улица</p>
+                <p className="form-group__text">{t.street}</p>
                 <DropdownList
                   value={state.street}
                   setValue={(value) =>
@@ -199,9 +201,10 @@ const ChooseRestaurant = () => {
                 />
               </div>
               <div className="form-group">
-                <p className="form-group__text">Кухня</p>
+                <p className="form-group__text">{t.cuisine}</p>
                 <DropdownListSelect
                   values={state.cuisine}
+                  placeholder={t.chooseCuisine}
                   setValues={(values) =>
                     dispatch({
                       type: ChooseRestarauntActionType.Cuisine,
@@ -225,7 +228,7 @@ const ChooseRestaurant = () => {
                 handleClick();
               }}
             >
-              Найти
+              {t.find}
             </button>
           </div>
         </div>

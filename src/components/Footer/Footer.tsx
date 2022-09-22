@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom';
 
+import useLocalization from '../../hooks/useLocalization';
+
 const Footer = () => {
+  const { t } = useLocalization();
+
   return (
     <footer className="footer">
       <section className="section-access">
@@ -10,14 +14,14 @@ const Footer = () => {
             className="section-access__link"
             style={{ backgroundImage: 'url(img/access-img/img1.jpg)' }}
           >
-            <p className="section-access__text title">Для партнеров</p>
+            <p className="section-access__text title">{t.partners}</p>
           </Link>
           <Link
             to="/for-clients"
             className="section-access__link"
             style={{ backgroundImage: 'url(img/access-img/img2.jpg)' }}
           >
-            <p className="section-access__text title">Для пользователей</p>
+            <p className="section-access__text title">{t.clients}</p>
           </Link>
         </div>
       </section>
@@ -25,12 +29,7 @@ const Footer = () => {
         <div className="footer__info">
           <div className="footer__container">
             <Link to="/" className="logo footer__logo">
-              <img
-                src="img/logo.svg"
-                alt="Логотип ресторана"
-                width="135"
-                height="59"
-              />
+              <img src="img/logo.svg" alt="logo" width="135" height="59" />
             </Link>
             <div className="footer__contacts">
               <a className="footer__link" href="mailto:totable.info@gmail.com">
@@ -61,28 +60,28 @@ const Footer = () => {
         </div>
         <div className="footer__more">
           <div className="footer__container footer__container--width">
-            <p className="footer__text">Узнайте о проекте больше</p>
+            <p className="footer__text">{t.learnMore}</p>
             <form className="footer-form" action="#">
               <label className="visually-hidden" htmlFor="name">
-                имя
+                {t.name}
               </label>
               <input
                 className="footer-form__input input-reset"
                 id="name"
                 type="text"
                 name="name"
-                placeholder="Имя"
+                placeholder={t.name}
                 required
               />
-              <label className="visually-hidden" htmlFor="name">
-                телефон
+              <label className="visually-hidden" htmlFor="tel">
+                {t.phoneNum}
               </label>
               <input
                 className="footer-form__input footer-form__input--tel input-reset"
                 id="tel"
                 type="tel"
                 name="tel"
-                placeholder="Телефон"
+                placeholder={t.phoneNum}
                 required
               />
             </form>

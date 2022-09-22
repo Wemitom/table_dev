@@ -11,3 +11,13 @@ export interface AuthState {
   refreshToken: string | null;
   user: User | null;
 }
+
+export enum Languages {
+  en = 'English',
+  ru = 'Русский',
+}
+
+export interface LocalizationState {
+  language: Languages;
+  translations: any;
+}

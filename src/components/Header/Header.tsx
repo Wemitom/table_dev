@@ -2,10 +2,13 @@ import { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
+import useLocalization from '../../hooks/useLocalization';
+import { Languages } from '../../store/interfaces';
 import SearchBar from '../SearchBar/SearchBar';
 
 const Header = () => {
   const [menuExpanded, setMenuExpanded] = useState(false);
+  const { t, lang, setLang } = useLocalization();
 
   useEffect(() => {
     menuExpanded
@@ -15,7 +18,7 @@ const Header = () => {
     return () => {
       document.body.classList.remove('dis-scroll');
     };
-  }, []);
+  }, [menuExpanded]);
 
   const closeMenu = () => setMenuExpanded(false);
 
@@ -24,19 +27,14 @@ const Header = () => {
       <div className="container">
         <nav className="header__inner">
           <Link to="/" className="header__logo logo">
-            <img
-              src="/img/logo.svg"
-              alt="Логотип ресторана"
-              width="135"
-              height="59"
-            />
+            <img src="/img/logo.svg" alt="logo" width="135" height="59" />
           </Link>
           <SearchBar />
           <button
             className={`burger btn-reset${
               menuExpanded ? ' burger--active' : ''
             }`}
-            aria-label="Открыть меню"
+            aria-label="Open menu"
             aria-expanded="false"
             onClick={() => setMenuExpanded(!menuExpanded)}
             data-burger
@@ -49,23 +47,32 @@ const Header = () => {
           >
             <li className="menu__item" data-menu-item onClick={closeMenu}>
               <Link to="/for-partners" className="menu__link">
-                для партнеров
+                {t.partners}
               </Link>
             </li>
             <li className="menu__item" data-menu-item onClick={closeMenu}>
               <Link to="/contacts" className="menu__link">
-                Контакты
+                {t.contacts}
               </Link>
             </li>
             <li className="menu__item" data-menu-item onClick={closeMenu}>
               <Link to="/login" className="menu__link">
-                войти
+                {t.login}
               </Link>
             </li>
             <li className="menu__item" data-menu-item onClick={closeMenu}>
               <Link to="/signup" className="menu__link">
-                зарегистрироваться
+                {t.signup}
               </Link>
+            </li>
+            <li
+              className="menu__item"
+              data-menu-item
+              onClick={() =>
+                setLang(lang === Languages.ru ? Languages.en : Languages.ru)
+              }
+            >
+              debug
             </li>
           </ul>
         </nav>

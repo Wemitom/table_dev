@@ -6,10 +6,12 @@ import useOutsideClickDetect from '../../hooks/useOutsideClickDetect';
 
 const DropdownListSelect = ({
   values,
+  placeholder,
   setValues,
   options,
 }: {
   values: string[];
+  placeholder: string;
   setValues: (values: string[]) => void;
   options: string[];
 }) => {
@@ -25,7 +27,7 @@ const DropdownListSelect = ({
         }`}
         onClick={() => setExpanded(!expanded)}
       >
-        {values.length ? values.join(', ') : 'Выберите кухни'}
+        {values.length ? values.join(', ') : placeholder}
       </button>
       <ul
         className={`dropdown__list list-reset${

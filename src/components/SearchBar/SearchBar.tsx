@@ -4,6 +4,7 @@ import axios, { AxiosResponse } from 'axios';
 import { throttle } from 'lodash';
 import SimpleBar from 'simplebar-react';
 
+import useLocalization from '../../hooks/useLocalization';
 import useOutsideClickDetect from '../../hooks/useOutsideClickDetect';
 import {
   AutoCompleteOption,
@@ -20,6 +21,7 @@ const SearchBar = () => {
     AutoCompleteOption[]
   >([]);
   const [loading, setLoading] = useState(false);
+  const { t } = useLocalization();
 
   const fetch = useMemo(
     () =>
@@ -68,7 +70,7 @@ const SearchBar = () => {
   return (
     <form className="header__search" action="#">
       <button className="header__btn btn-reset">
-        <span className="visually-hidden">иконка поиска</span>
+        <span className="visually-hidden">{t.searchButton}</span>
       </button>
       <label className="visually-hidden" htmlFor="search">
         Поиск по сайту
@@ -79,7 +81,7 @@ const SearchBar = () => {
           id="search"
           type="search"
           name="search"
-          placeholder="Введите название"
+          placeholder={t.searchBarPlaceholder}
           autoComplete="off"
           value={searchQuery}
           onFocus={() => {

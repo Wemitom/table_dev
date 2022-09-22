@@ -1,0 +1,19 @@
+{
+  "partners": "Для партнеров",
+  "contacts": "Контакты",
+  "login": "Войти",
+  "signup": "Зарегистрироваться",
+  "searchButton": "Иконка поиска",
+  "searchBarPlaceholder": "Введите название",
+  "findRestaurant": "Подбрать ресторан",
+  "district": "Район",
+  "street": "Улица",
+  "cuisine": "Кухня",
+  "chooseCuisine": "Выберите кухни",
+  "find": "Найти",
+  "clients": "Для клиентов",
+  "learnMore": "Узнайте о проекте больше",
+  "name": "Имя",
+  "lastName": "Фамилия",
+  "phoneNum": "Телефон"
+}

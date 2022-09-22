@@ -1,0 +1,19 @@
+{
+  "partners": "For partners",
+  "contacts": "Contacts",
+  "login": "Login",
+  "signup": "Signup",
+  "searchButton": "Search icon",
+  "searchBarPlaceholder": "Enter the name",
+  "findRestaurant": "Find a restaurant",
+  "district": "District",
+  "street": "Street",
+  "cuisine": "Cuisine",
+  "chooseCuisine": "Choose cuisines",
+  "find": "Find",
+  "clients": "For clients",
+  "learnMore": "Learn more about the project",
+  "name": "Name",
+  "lastName": "Last name",
+  "phoneNum": "Phone number"
+}
