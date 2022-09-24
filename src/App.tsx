@@ -9,7 +9,10 @@ import HeaderLayout from './components/Header/HeaderLayout';
 import Home from './components/Home/Home';
 import AuthLayout from './components/LoginFooter/AuthLayout';
 import LoginUser from './components/LoginUser/LoginUser';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import RegisterUser from './components/SignupUser/SignupUser';
+import UserProfile from './components/UserProfile/UserProfile';
+import UserProfileLayout from './components/UserProfileLayout/UserProfileLayout';
 import { Languages } from './store/interfaces';
 import { useGetTranslationQuery } from './store/localizationApi';
 import { setTranslations } from './store/localizeSlice';
@@ -19,8 +22,7 @@ function App() {
   const language = useSelector(
     (state: RootState) => state.localization.language
   );
-  const { data, isError, isLoading, isSuccess } =
-    useGetTranslationQuery(language);
+  const { data } = useGetTranslationQuery(language);
   const dispatch = useDispatch();
   useEffect(() => {
     if (data) {
@@ -52,22 +54,15 @@ function App() {
             </>
           }
         />
+        <Route path="" element={<ProtectedRoute />}>
+          <Route path="profile" element={<UserProfileLayout />}>
+            <Route path="" element={<UserProfile />} />
+            <Route path="favorites" element={<UserProfile />} />
+          </Route>
+        </Route>
       </Route>
     </Routes>
   );
 }
 
 export default App;
-
-/* Landing page 
-        <Header />
-        <ImagesCarousel />
-        <ChooseRestaurant />
-        <Footer />
-
-    Assessment
-        <Header />
-        <HostesProfile />
-        <GuestAssessment />
-        <ShortFooter /> 
-*/
