@@ -20,7 +20,7 @@ const RestaurantDescription = () => {
           </div>
         </div>
         <div className="local-restaurant__map">
-          <img src="img/map-local.jpg" alt="карта" width="1200" height="400" />
+          <img src="/img/map-local.jpg" alt="карта" width="1200" height="400" />
         </div>
         <button className="local-restaurant__like btn-reset"></button>
         <div className="local-restaurant__box">
@@ -35,7 +35,7 @@ const RestaurantDescription = () => {
           <div className="local-restaurant__rating">
             <h3 className="local-restaurant__heading">Рейтинг</h3>
             <svg width="28" height="26">
-              <use href="img/sprite.svg#icon-star"></use>
+              <use href="/img/sprite.svg#icon-star"></use>
             </svg>
             4.94
           </div>

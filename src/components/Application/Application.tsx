@@ -6,14 +6,14 @@ const Application = () => {
           <div className="application__avatar">
             <img
               className="application__img"
-              src="img/partners-office/icon1.svg"
+              src="/img/partners-office/icon1.svg"
               alt="Аватарка"
             />
           </div>
           <p className="application__name">Анна Николаева</p>
           <div className="application__rating">
             <svg className="application__star" width="30" height="30">
-              <use href="img/sprite.svg#icon-star"></use>
+              <use href="/img/sprite.svg#icon-star"></use>
             </svg>
             4.94
           </div>

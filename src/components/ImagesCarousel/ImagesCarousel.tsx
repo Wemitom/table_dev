@@ -1,8 +1,11 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useReducer } from 'react';
 
 import { useSwipeable } from 'react-swipeable';
 
 import { CurSlideAction, CurSlideActionType, Slide } from './interfaces';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 const ImagesCarousel = ({ slides }: { slides: Slide[] }) => {
   const curSlideReducer = (state: number, action: CurSlideAction): number => {
@@ -19,23 +22,12 @@ const ImagesCarousel = ({ slides }: { slides: Slide[] }) => {
   };
 
   const [curSlide, curSlideDispatch] = useReducer(curSlideReducer, 0);
-  const [, setWidth] = useState(window.innerWidth);
 
   // Хук для переключения между слайдами с помощью свайпа на телефоне
   const handlers = useSwipeable({
     onSwipedLeft: () => curSlideDispatch({ type: CurSlideActionType.Next }),
     onSwipedRight: () => curSlideDispatch({ type: CurSlideActionType.Prev }),
   });
-
-  useEffect(() => {
-    const changeWidth = () => setWidth(window.innerWidth);
-    // Ставим эвент листенер на измение ширины, т.к. влияет на переключение слайдов
-    window.addEventListener('resize', changeWidth);
-
-    return () => {
-      window.removeEventListener('resize', changeWidth);
-    };
-  }, []);
 
   // Ставим интервал в 15сек для автоматической прокрутки по слайдам
   useEffect(() => {
@@ -70,7 +62,6 @@ const ImagesCarousel = ({ slides }: { slides: Slide[] }) => {
               } else if (index === curSlide + 1) {
                 slideClassName += ' swiper-slide-next';
               }
-
               return (
                 <li
                   className={slideClassName}

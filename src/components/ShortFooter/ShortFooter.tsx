@@ -8,7 +8,7 @@ const ShortFooter = () => {
           <div className="footer__container">
             <Link to="/" className="logo footer__logo">
               <img
-                src="img/logo.svg"
+                src="/img/logo.svg"
                 alt="Логотип ресторана"
                 width="135"
                 height="59"
@@ -16,7 +16,7 @@ const ShortFooter = () => {
             </Link>
             <div className="footer__contacts">
               <a className="footer__link" href="mailto:totable.info@gmail.com">
-                totable.info@gmail.com{' '}
+                totable.info@gmail.com
               </a>
               <a className="footer__link" href="tel:79269073553">
                 +7 926 907-35-53

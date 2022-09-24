@@ -8,7 +8,7 @@ const Login = () => {
             href="#"
           >
             <img
-              src="img/logo.svg"
+              src="/img/logo.svg"
               alt="Логотип ресторана"
               width="135"
               height="59"

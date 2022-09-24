@@ -5,7 +5,7 @@ const RestaurantInfo = () => {
         <div className="personal-account__info">
           <img
             className="personal-account__avatar"
-            src="img/personal-private/img3.png"
+            src="/img/personal-private/img3.png"
             alt="Аватар"
             width="200"
             height="200"

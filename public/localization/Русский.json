@@ -3,17 +3,20 @@
   "contacts": "Контакты",
   "login": "Войти",
   "signup": "Зарегистрироваться",
+  "logout": "Выйти",
   "searchButton": "Иконка поиска",
   "searchBarPlaceholder": "Введите название",
-  "findRestaurant": "Подбрать ресторан",
+  "findRestaurant": "Подобрать ресторан",
   "district": "Район",
   "street": "Улица",
   "cuisine": "Кухня",
   "chooseCuisine": "Выберите кухни",
   "find": "Найти",
-  "clients": "Для клиентов",
+  "clients": "Для пользователей",
   "learnMore": "Узнайте о проекте больше",
   "name": "Имя",
   "lastName": "Фамилия",
-  "phoneNum": "Телефон"
+  "phoneNum": "Телефон",
+  "profile": "Личный кабинет",
+  "favorites": "Избранное"
 }

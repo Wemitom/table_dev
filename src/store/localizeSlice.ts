@@ -12,7 +12,6 @@ const localizeSlice = createSlice({
   initialState,
   reducers: {
     setTranslations: (state: LocalizationState, action: PayloadAction<any>) => {
-      console.log(action.payload);
       state.translations = action.payload;
     },
     setLanguage: (

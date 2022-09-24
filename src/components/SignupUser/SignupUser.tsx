@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import { useLazySignupUserQuery } from '../../store/authApi';
 import { setTokens, setUser } from '../../store/authSlice';
@@ -12,8 +11,7 @@ import { SignupData } from './interfaces';
 
 const SignupUser = () => {
   const [signupSuccessful, setSignupSuccessful] = useState(false);
-  const [signup, { data, error, isLoading }, lastPromiseInfo] =
-    useLazySignupUserQuery();
+  const [signup, { data, error, isLoading }] = useLazySignupUserQuery();
 
   const dispatch = useDispatch();
 
@@ -26,8 +24,8 @@ const SignupUser = () => {
       if (data) {
         dispatch(
           setTokens({
-            accessToken: data.accessToken!,
-            refreshToken: data.refreshToken!,
+            token: data.token!,
+            refresh: data.refresh!,
           })
         );
         dispatch(setUser(data.user!));

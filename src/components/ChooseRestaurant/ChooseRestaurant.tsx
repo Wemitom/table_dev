@@ -1,10 +1,17 @@
 import { useEffect, useReducer, useState } from 'react';
 
 import CircularProgress from '@mui/material/CircularProgress/CircularProgress';
-import { YMaps, Map, ListBox, ListBoxItem } from '@pbe/react-yandex-maps';
+import {
+  YMaps,
+  Map,
+  ListBox,
+  ListBoxItem,
+  ZoomControl,
+} from '@pbe/react-yandex-maps';
 import axios, { AxiosResponse } from 'axios';
 
 import useLocalization from '../../hooks/useLocalization';
+import { Languages } from '../../store/interfaces';
 import DropdownList from '../DropdownList/DropdownList';
 import DropdownListSelect from '../DropdownListSelect/DropdownListSelect';
 import Placemarks from '../Placemarks/Placemarks';
@@ -63,9 +70,9 @@ const ChooseRestaurant = () => {
   >([]); // Массив информации о найденных ресторанах
   const [isMapSmaller, setIsMapSmaller] = useState(window.innerWidth > 640); // Надо ли менять высоту/ширину карты
   const [loading, setLoading] = useState(false); // Выполняется ли запрос?
-  const { t } = useLocalization();
+  const { t, lang } = useLocalization();
 
-  /* Мемоизируем функцию, т.к. используется в качестве параметра для useEffect.
+  /* 
      На вход - значения, которые пойдут в http запрос; колбек функция.
   */
   const fetch = (
@@ -125,12 +132,19 @@ const ChooseRestaurant = () => {
                 )}
               </div>
 
-              <YMaps query={{ lang: 'ru_RU', mode: 'debug' }}>
+              <YMaps
+                key={lang}
+                query={{
+                  lang: lang === Languages.ru ? 'ru_RU' : 'en_US',
+                  mode: 'debug',
+                }}
+              >
                 <Map
                   state={mapState}
                   height={isMapSmaller ? '500px' : '300px'}
                   width={isMapSmaller ? '600px' : '360px'}
                 >
+                  <ZoomControl />
                   <ListBox
                     data={{
                       content: restarauntsResult.length

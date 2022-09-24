@@ -3190,6 +3190,7 @@ p {
 .input-error {
   color: red;
   font-size: 14px;
+  text-align: initial;
 }
 
 .input--disabled {

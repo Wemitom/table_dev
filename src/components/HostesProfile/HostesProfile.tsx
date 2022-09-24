@@ -10,7 +10,7 @@ const HostesProfile = () => {
               <div className="hostes-profile__avatar">
                 <img
                   className="hostes-profile__img"
-                  src="img/partners-office/icon1.svg"
+                  src="/img/partners-office/icon1.svg"
                   alt="Аватар"
                   width="110"
                   height="133"
@@ -18,7 +18,7 @@ const HostesProfile = () => {
               </div>
               <div className="hostes-profile__rating">
                 <svg className="hostes-profile__star" width="30" height="30">
-                  <use href="img/sprite.svg#icon-star"></use>
+                  <use href="/img/sprite.svg#icon-star"></use>
                 </svg>
                 4.94
               </div>

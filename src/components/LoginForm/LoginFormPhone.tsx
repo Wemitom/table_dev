@@ -1,8 +1,7 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 
-const LoginForm = ({ handleSubmit }: { handleSubmit: () => void }) => {
+const LoginFormPhone = ({ handleSubmit }: { handleSubmit: () => void }) => {
   const invalidInput = {
     border: '1px solid #f79191',
   };
@@ -20,7 +19,7 @@ const LoginForm = ({ handleSubmit }: { handleSubmit: () => void }) => {
       onSubmit={handleSubmit}
     >
       {({ errors, touched }) => (
-        <Form className="register-form" action="#">
+        <Form className="register-form">
           <div className="register-form__inner">
             <div className="register-form__group">
               <label className="register-form__label" htmlFor="tel">
@@ -55,4 +54,4 @@ const LoginForm = ({ handleSubmit }: { handleSubmit: () => void }) => {
   );
 };
 
-export default LoginForm;
+export default LoginFormPhone;

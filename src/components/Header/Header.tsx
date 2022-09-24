@@ -1,14 +1,21 @@
 import { useEffect, useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
 
 import useLocalization from '../../hooks/useLocalization';
+import { logout } from '../../store/authSlice';
 import { Languages } from '../../store/interfaces';
+import { RootState } from '../../store/store';
+import Notifications from '../Notifications/Notifications';
 import SearchBar from '../SearchBar/SearchBar';
 
 const Header = () => {
   const [menuExpanded, setMenuExpanded] = useState(false);
+  const user = useSelector((state: RootState) => state.auth.user);
+  const dispatch = useDispatch();
   const { t, lang, setLang } = useLocalization();
+  const location = useLocation();
 
   useEffect(() => {
     menuExpanded
@@ -29,7 +36,8 @@ const Header = () => {
           <Link to="/" className="header__logo logo">
             <img src="/img/logo.svg" alt="logo" width="135" height="59" />
           </Link>
-          <SearchBar />
+          {location.pathname === '/' && <SearchBar />}
+          {user && <Notifications />}
           <button
             className={`burger btn-reset${
               menuExpanded ? ' burger--active' : ''
@@ -55,24 +63,58 @@ const Header = () => {
                 {t.contacts}
               </Link>
             </li>
-            <li className="menu__item" data-menu-item onClick={closeMenu}>
-              <Link to="/login" className="menu__link">
-                {t.login}
-              </Link>
-            </li>
-            <li className="menu__item" data-menu-item onClick={closeMenu}>
-              <Link to="/signup" className="menu__link">
-                {t.signup}
-              </Link>
-            </li>
+            {!user ? (
+              <>
+                <li className="menu__item" data-menu-item onClick={closeMenu}>
+                  <Link to="/login" className="menu__link">
+                    {t.login}
+                  </Link>
+                </li>
+                <li className="menu__item" data-menu-item onClick={closeMenu}>
+                  <Link to="/signup" className="menu__link">
+                    {t.signup}
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                {location.pathname !== '/profile' ? (
+                  <li className="menu__item" data-menu-item onClick={closeMenu}>
+                    <Link to="/profile" className="menu__link">
+                      {t.profile}
+                    </Link>
+                  </li>
+                ) : (
+                  <li className="menu__item" data-menu-item onClick={closeMenu}>
+                    <Link to="/profile/favorites" className="menu__link">
+                      {t.favorites}
+                    </Link>
+                  </li>
+                )}
+                <li
+                  className="menu__item"
+                  data-menu-item
+                  onClick={() => {
+                    closeMenu();
+                    dispatch(logout());
+                  }}
+                >
+                  <span className="menu__link" style={{ cursor: 'pointer' }}>
+                    {t.logout}
+                  </span>
+                </li>
+              </>
+            )}
+
             <li
               className="menu__item"
               data-menu-item
+              style={{ cursor: 'pointer' }}
               onClick={() =>
                 setLang(lang === Languages.ru ? Languages.en : Languages.ru)
               }
             >
-              debug
+              lang
             </li>
           </ul>
         </nav>

@@ -1,14 +1,13 @@
 export interface User {
-  firstName: string;
-  lastName: string;
-  profileImg: string;
-  email: string;
-  phoneNum: string;
+  id_visitor: number;
+  name: string;
+  phone: string;
+  email?: number;
 }
 
 export interface AuthState {
-  accessToken: string | null;
-  refreshToken: string | null;
+  token: string | null;
+  refresh: string | null;
   user: User | null;
 }
 

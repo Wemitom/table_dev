@@ -3,6 +3,7 @@
   "contacts": "Contacts",
   "login": "Login",
   "signup": "Signup",
+  "logout": "Logout",
   "searchButton": "Search icon",
   "searchBarPlaceholder": "Enter the name",
   "findRestaurant": "Find a restaurant",
@@ -15,5 +16,7 @@
   "learnMore": "Learn more about the project",
   "name": "Name",
   "lastName": "Last name",
-  "phoneNum": "Phone number"
+  "phoneNum": "Phone number",
+  "profile": "Profile",
+  "favorites": "Favorites"
 }

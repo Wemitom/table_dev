@@ -15,7 +15,7 @@ const mutex = new Mutex();
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://2table.ru/api/v1',
   prepareHeaders: (headers, { getState }) => {
-    const { accessToken } = getState() as AuthState;
+    const { token: accessToken } = getState() as AuthState;
     if (accessToken) {
       headers.set('authorization', `Bearer ${accessToken}`);
     }
@@ -44,8 +44,8 @@ export const baseQueryWithReauth: BaseQueryFn<
           api.dispatch(
             setTokens(
               refreshResult.data as {
-                accessToken: string;
-                refreshToken: string;
+                token: string;
+                refresh: string;
               }
             )
           );
