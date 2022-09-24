@@ -10,6 +10,7 @@ import Home from './components/Home/Home';
 import AuthLayout from './components/LoginFooter/AuthLayout';
 import LoginUser from './components/LoginUser/LoginUser';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import RegisterPartners from './components/RegisterPartners/RegisterPartners';
 import RegisterUser from './components/SignupUser/SignupUser';
 import UserProfile from './components/UserProfile/UserProfile';
 import UserProfileLayout from './components/UserProfileLayout/UserProfileLayout';
@@ -36,32 +37,7 @@ function App() {
   }, [language]);
 
   return (
-    <Routes>
-      <Route path="/" element={<AuthLayout />}>
-        <Route path="signup" element={<RegisterUser />} />
-        <Route path="login" element={<LoginUser />} />
-      </Route>
-      <Route path="/" element={<HeaderLayout />}>
-        <Route index element={<Home />} />
-        <Route
-          path="for-partners"
-          element={
-            <>
-              <div className="content">
-                <ForPartners />
-              </div>
-              <Footer />
-            </>
-          }
-        />
-        <Route path="" element={<ProtectedRoute />}>
-          <Route path="profile" element={<UserProfileLayout />}>
-            <Route path="" element={<UserProfile />} />
-            <Route path="favorites" element={<UserProfile />} />
-          </Route>
-        </Route>
-      </Route>
-    </Routes>
+    <RegisterPartners handleSignup={() => { } } loading={false} error={undefined} />
   );
 }
 
