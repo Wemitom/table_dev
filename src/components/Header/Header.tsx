@@ -53,11 +53,13 @@ const Header = () => {
             className={`menu list-reset${menuExpanded ? ' menu--active' : ''}`}
             data-menu
           >
-            <li className="menu__item" data-menu-item onClick={closeMenu}>
-              <Link to="/for-partners" className="menu__link">
-                {t.partners}
-              </Link>
-            </li>
+            {!user && (
+              <li className="menu__item" data-menu-item onClick={closeMenu}>
+                <Link to="/for-partners" className="menu__link">
+                  {t.partners}
+                </Link>
+              </li>
+            )}
             <li className="menu__item" data-menu-item onClick={closeMenu}>
               <Link to="/contacts" className="menu__link">
                 {t.contacts}

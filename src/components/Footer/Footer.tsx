@@ -1,35 +1,38 @@
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import useLocalization from '../../hooks/useLocalization';
+import { setVersion } from '../../store/versionSlice';
 
 const Footer = () => {
   const { t } = useLocalization();
+  const dispatcher = useDispatch();
 
   return (
     <footer className="footer">
       <section className="section-access">
         <div className="section-access__inner">
-          <Link
-            to="/for-partners"
+          <div
             className="section-access__link"
-            style={{ backgroundImage: 'url(img/access-img/img1.jpg)' }}
+            style={{ backgroundImage: 'url(/img/access-img/img1.jpg)' }}
+            onClick={() => dispatcher(setVersion('forPartners'))}
           >
             <p className="section-access__text title">{t.partners}</p>
-          </Link>
-          <Link
-            to="/for-clients"
+          </div>
+          <div
             className="section-access__link"
-            style={{ backgroundImage: 'url(img/access-img/img2.jpg)' }}
+            style={{ backgroundImage: 'url(/img/access-img/img2.jpg)' }}
+            onClick={() => dispatcher(setVersion('forClients'))}
           >
             <p className="section-access__text title">{t.clients}</p>
-          </Link>
+          </div>
         </div>
       </section>
       <div className="footer__inner">
         <div className="footer__info">
           <div className="footer__container">
             <Link to="/" className="logo footer__logo">
-              <img src="img/logo.svg" alt="logo" width="135" height="59" />
+              <img src="/img/logo.svg" alt="logo" width="135" height="59" />
             </Link>
             <div className="footer__contacts">
               <a className="footer__link" href="mailto:totable.info@gmail.com">

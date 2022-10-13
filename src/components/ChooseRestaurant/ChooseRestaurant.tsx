@@ -80,7 +80,7 @@ const ChooseRestaurant = () => {
     callback: (result?: AxiosResponse) => void
   ) => {
     axios
-      .post(`/api/v1/search_location`, {
+      .post(`/api/v1/search/search_location`, {
         district: request.area,
         limit: 5,
         cuisine: request.cuisine,

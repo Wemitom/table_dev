@@ -83,18 +83,26 @@ const ImagesCarousel = ({ slides }: { slides: Slide[] }) => {
               );
             })}
           </ul>
-          <div
-            className={`swiper-button-next ${
-              curSlide !== slides.length - 1 ? '' : 'swiper-button-disabled'
-            }`}
-            onClick={() => curSlideDispatch({ type: CurSlideActionType.Next })}
-          ></div>
-          <div
-            className={`swiper-button-prev ${
-              curSlide ? '' : 'swiper-button-disabled'
-            }`}
-            onClick={() => curSlideDispatch({ type: CurSlideActionType.Prev })}
-          ></div>
+          {slides.length > 1 && (
+            <>
+              <div
+                className={`swiper-button-next ${
+                  curSlide !== slides.length - 1 ? '' : 'swiper-button-disabled'
+                }`}
+                onClick={() =>
+                  curSlideDispatch({ type: CurSlideActionType.Next })
+                }
+              ></div>
+              <div
+                className={`swiper-button-prev ${
+                  curSlide ? '' : 'swiper-button-disabled'
+                }`}
+                onClick={() =>
+                  curSlideDispatch({ type: CurSlideActionType.Prev })
+                }
+              ></div>
+            </>
+          )}
           <div
             className={
               slides.length

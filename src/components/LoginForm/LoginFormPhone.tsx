@@ -12,9 +12,7 @@ const LoginFormPhone = ({ handleSubmit }: { handleSubmit: () => void }) => {
         phoneNum: '',
       }}
       validationSchema={Yup.object().shape({
-        phoneNum: Yup.string()
-          .required('Обязательно для заполнения')
-          .phone('RU', true, 'Неверный телефон!'),
+        phoneNum: Yup.string().required('Обязательно для заполнения'),
       })}
       onSubmit={handleSubmit}
     >

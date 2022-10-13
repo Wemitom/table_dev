@@ -14,6 +14,7 @@ import { authApi } from './authApi';
 import authReducer from './authSlice';
 import { localizationApi } from './localizationApi';
 import localizationReducer from './localizeSlice';
+import versionSlice from './versionSlice';
 
 const persistConfigAuth = {
   key: 'auth',
@@ -25,17 +26,27 @@ const persistConfigLocalization = {
   version: 1,
   storage,
 };
+const persistConfigVersion = {
+  key: 'version',
+  version: 1,
+  storage,
+};
 
 const persistedReducerAuth = persistReducer(persistConfigAuth, authReducer);
 const persistedReducerLocalization = persistReducer(
   persistConfigLocalization,
   localizationReducer
 );
+const persistedReducerVersion = persistReducer(
+  persistConfigVersion,
+  versionSlice
+);
 
 export const store = configureStore({
   reducer: {
     auth: persistedReducerAuth,
     localization: persistedReducerLocalization,
+    version: persistedReducerVersion,
     [authApi.reducerPath]: authApi.reducer,
     [localizationApi.reducerPath]: localizationApi.reducer,
   },

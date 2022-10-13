@@ -1,16 +1,13 @@
 import { useSelector } from 'react-redux';
-import { Route, Navigate, useLocation, Outlet } from 'react-router';
+import { Navigate, Outlet } from 'react-router';
 
 import { RootState } from '../../store/store';
 
+// Ставим данный компонент как пропс component для Route, когда для выбранного маршрута нужна авторизация
 const ProtectedRoute = () => {
   const auth = useSelector((state: RootState) => state.auth);
-  const location = useLocation();
 
   if (auth.user) {
-    if (location.pathname === '/login') {
-      return <Navigate to="/" replace />;
-    }
     return <Outlet />;
   } else if (!auth.user) {
     return <Navigate to="/login" replace />;

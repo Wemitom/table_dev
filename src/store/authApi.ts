@@ -7,19 +7,19 @@ import { AuthState } from './interfaces';
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: '/',
+    baseUrl: '/api/v1/auth',
   }),
   endpoints: (builder) => ({
     signupUser: builder.query<AuthState, SignupData>({
       query: (data) => ({
-        url: '/sign_up',
+        url: '/register/',
         method: 'POST',
         body: data,
       }),
     }),
     loginUser: builder.query<AuthState, LoginData>({
       query: (data) => ({
-        url: '/log_in',
+        url: '/login/',
         method: 'POST',
         body: data,
       }),

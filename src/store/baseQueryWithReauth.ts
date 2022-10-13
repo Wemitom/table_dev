@@ -13,7 +13,7 @@ const mutex = new Mutex();
 
 // Ставим хедеры в запрос (если токен имеется)
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://2table.ru/api/v1',
+  baseUrl: '/api/v1',
   prepareHeaders: (headers, { getState }) => {
     const { token: accessToken } = getState() as AuthState;
     if (accessToken) {
@@ -36,7 +36,7 @@ export const baseQueryWithReauth: BaseQueryFn<
       const release = await mutex.acquire();
       try {
         const refreshResult = await baseQuery(
-          '/refreshToken',
+          'auth/refreshToken/',
           api,
           extraOptions
         );

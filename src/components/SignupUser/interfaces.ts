@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import 'yup-phone';
+import 'yup-phone-lite';
 
 export const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -11,7 +11,7 @@ export const SignupSchema = Yup.object().shape({
     .max(32, 'Длина ника не может превышать 32 символа'),
   phoneNum: Yup.string()
     .required('Обязательно для заполнения')
-    .phone('RU', true, 'Неверный телефон!'),
+    .phone('RU', 'Неверный телефон!'),
   email: Yup.string().email('Неверный email!'),
   password: Yup.string()
     .min(6, 'Пароль должен содержать как минимум 6 символов')

@@ -27,7 +27,7 @@ const SearchBar = () => {
     () =>
       throttle(
         (request: SearchData, callback: (result?: AxiosResponse) => void) => {
-          axios.post(`/api/v1/search_by_name`, request).then(callback);
+          axios.post(`/api/v1/search/search_by_name`, request).then(callback);
         },
         200
       ),
