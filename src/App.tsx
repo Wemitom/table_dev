@@ -13,13 +13,8 @@ import ImagesCarousel from './components/ImagesCarousel/ImagesCarousel';
 import AuthLayout from './components/LoginFooter/AuthLayout';
 import LoginUser from './components/LoginUser/LoginUser';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
-<<<<<<< HEAD
 import RestaurantDescription from './components/RestaurantDescription/RestaurantDescription';
 import SignupUser from './components/SignupUser/SignupUser';
-=======
-import RegisterPartners from './components/RegisterPartners/RegisterPartners';
-import RegisterUser from './components/SignupUser/SignupUser';
->>>>>>> 05c4bd3c6c43e9f67b035f9a3e66d897a28adcec
 import UserProfile from './components/UserProfile/UserProfile';
 import UserProfileLayout from './components/UserProfileLayout/UserProfileLayout';
 import { Languages } from './store/interfaces';
