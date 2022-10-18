@@ -30,3 +30,10 @@ export interface LocalizationState {
 export interface VersionState {
   version: 'forClients' | 'forPartners';
 }
+/*                            */
+
+/* Интерфейсы для схемы зала */
+export interface TableState {
+  numTable: number;
+  status: 'booked' | 'free' | 'unknown';
+}

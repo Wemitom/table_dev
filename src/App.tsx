@@ -5,22 +5,20 @@ import { Route, Routes } from 'react-router-dom';
 
 import 'simplebar-react/dist/simplebar.min.css';
 
-import Footer from './components/Footer/Footer';
-import ForPartners from './components/ForPartners/ForPartners';
-import HeaderLayout from './components/Header/HeaderLayout';
-import Home from './components/Home/Home';
-import ImagesCarousel from './components/ImagesCarousel/ImagesCarousel';
-import AuthLayout from './components/LoginFooter/AuthLayout';
-import LoginUser from './components/LoginUser/LoginUser';
-import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
-import RestaurantDescription from './components/RestaurantDescription/RestaurantDescription';
-import SignupUser from './components/SignupUser/SignupUser';
-import UserProfile from './components/UserProfile/UserProfile';
-import UserProfileLayout from './components/UserProfileLayout/UserProfileLayout';
+import ProtectedRoute from './components/ProtectedRoute';
+import UserProfile from './components/UserProfile';
+import AuthLayout from './layouts/AuthLayout';
+import HeaderLayout from './layouts/HeaderLayout';
+import UserProfileLayout from './layouts/UserProfileLayout';
+import ForPartnersPage from './pages/ForPartnersPage';
+import Home from './pages/Home';
+import LoginUser from './pages/LoginUser';
+import Restaurant from './pages/Restaurant';
+import Signup from './pages/Signup';
+import { RootState } from './store';
+import { useGetTranslationQuery } from './store/api/localizationApi';
 import { Languages } from './store/interfaces';
-import { useGetTranslationQuery } from './store/localizationApi';
-import { setTranslations } from './store/localizeSlice';
-import { RootState } from './store/store';
+import { setTranslations } from './store/slices/localizeSlice';
 
 function App() {
   // Фетчим .json с локализацией для выбранного языка
@@ -34,6 +32,7 @@ function App() {
       dispatch(setTranslations(data));
     }
   }, [dispatch, data]);
+  const version = useSelector((state: RootState) => state.version.version);
 
   // Ставим текущий язык в тэг html
   useEffect(() => {
@@ -42,11 +41,10 @@ function App() {
   }, [language]);
 
   return (
-<<<<<<< HEAD
     <Routes>
       {/* Маршрут для регистрации/авторизации */}
       <Route path="/" element={<AuthLayout />}>
-        <Route path="signup" element={<SignupUser />} />
+        <Route path="signup" element={<Signup />} />
         <Route path="login" element={<LoginUser />} />
       </Route>
       {/* Главный маршрут с хедером */}
@@ -54,36 +52,9 @@ function App() {
         {/* Лендинг */}
         <Route index element={<Home />} />
         {/* Страница с информацией для партнеров */}
-        <Route
-          path="for-partners"
-          element={
-            <>
-              <div className="content">
-                <ForPartners />
-              </div>
-              <Footer />
-            </>
-          }
-        />
+        <Route path="for-partners" element={<ForPartnersPage />} />
         {/* Страница ресторана */}
-        <Route
-          path="restaurant/:name"
-          element={
-            <>
-              <ImagesCarousel
-                slides={[
-                  {
-                    imgPath: '/img/hero-bg/bg1.jpg',
-                    title: '',
-                    description: '',
-                  },
-                ]}
-              />
-              <RestaurantDescription />
-              <Footer />
-            </>
-          }
-        />
+        <Route path="restaurant/:name" element={<Restaurant />} />
         {/* Маршрут для страниц требующих авторизации */}
         <Route path="" element={<ProtectedRoute />}>
           {/* Личная страница */}
@@ -94,9 +65,6 @@ function App() {
         </Route>
       </Route>
     </Routes>
-=======
-    <RegisterPartners handleSignup={() => { } } loading={false} error={undefined} />
->>>>>>> 05c4bd3c6c43e9f67b035f9a3e66d897a28adcec
   );
 }
 

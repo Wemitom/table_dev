@@ -1200,8 +1200,12 @@ p {
   -o-transition: background-color 0.2s;
   transition: background-color 0.2s;
 }
-.section-access__link:hover {
+.section-access__link:hover,
+.section-access__link.chosen:hover {
   background-color: rgba(0, 0, 0, 0.75);
+}
+.section-access__link.chosen {
+  background-color: rgba(0, 0, 0, 0.65);
 }
 .section-access__text {
   color: #fff;
@@ -1750,9 +1754,7 @@ p {
   margin: 0 auto;
 }
 .table-time {
-  position: absolute;
-  top: 50%;
-  left: 28%;
+  position: fixed;
   overflow: hidden;
   font-size: 14px;
   border: 1px solid #909090;

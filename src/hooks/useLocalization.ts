@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 
+import { RootState } from '../store';
 import { Languages } from '../store/interfaces';
-import { setLanguage } from '../store/localizeSlice';
-import { RootState } from '../store/store';
+import { setLanguage } from '../store/slices/localizeSlice';
 
 const useLocalization = () => {
   const t = useSelector((state: RootState) => state.localization.translations);

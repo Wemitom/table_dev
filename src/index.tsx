@@ -9,7 +9,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import App from './App';
 import './vendor.css';
 import './index.css';
-import { store } from './store/store';
+import { store } from './store';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);

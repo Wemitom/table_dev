@@ -15,9 +15,10 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^27.5.2",
     "@types/node": "^17.0.45",
-    "@types/react": "^18.0.19",
+    "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
     "@types/react-input-mask": "^3.0.1",
+    "@types/react-redux": "^7.1.24",
     "async-mutex": "^0.4.0",
     "axios": "^0.27.2",
     "formik": "^2.2.9",
@@ -29,6 +30,7 @@
     "react-router-dom": "^6.4.0",
     "react-scripts": "5.0.1",
     "react-swipeable": "^7.0.0",
+    "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
     "simplebar-react": "^2.4.1",
     "swiper": "^8.4.2",
@@ -95,5 +97,8 @@
     "compression-webpack-plugin": "^10.0.0",
     "webpack-bundle-analyzer": "^4.6.1",
     "webpack-cli": "^4.10.0"
+  },
+  "compilerOptions": {
+    "moduleResolution": "node"
   }
 }
