@@ -35,5 +35,11 @@ export interface VersionState {
 /* Интерфейсы для схемы зала */
 export interface TableState {
   numTable: number;
-  status: 'booked' | 'free' | 'unknown';
+  status: 'engaged' | 'free' | 'unknown';
 }
+
+export interface TableTimeInfo {
+  time: string;
+  status: 'engaged' | 'free' | 'unknown';
+}
+/*                           */

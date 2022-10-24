@@ -3,15 +3,18 @@ import { useRef, useState } from 'react';
 import SimpleBar from 'simplebar-react';
 
 import useOutsideClickDetect from '../../hooks/useOutsideClickDetect';
+import { option } from '../ChooseRestaurant/interfaces';
 
 const DropdownList = ({
   value,
   setValue,
   options,
+  placeholder,
 }: {
-  value: string;
-  setValue: (value: string) => void;
-  options: string[];
+  value: option;
+  setValue: (value: option) => void;
+  options: option[];
+  placeholder?: string;
 }) => {
   const [expanded, setExpanded] = useState(false);
   const wrapper = useRef(null);
@@ -25,7 +28,7 @@ const DropdownList = ({
         }`}
         onClick={() => setExpanded(!expanded)}
       >
-        {value}
+        {value.label || placeholder}
       </button>
       <ul
         className={`dropdown__list list-reset${
@@ -41,15 +44,14 @@ const DropdownList = ({
         >
           {options.map((option) => (
             <li
-              key={option}
+              key={option.value!.toString()}
               className="dropdown__list-item"
-              data-value="travel"
               onClick={() => {
                 setValue(option);
                 setExpanded(false);
               }}
             >
-              {option}
+              {option.label}
             </li>
           ))}
         </SimpleBar>

@@ -36,7 +36,6 @@ const Home = () => {
         />
         <ChooseRestaurant />
       </div>
-      <Footer />
     </>
   );
 };

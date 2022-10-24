@@ -5,7 +5,7 @@ import { Languages } from '../interfaces';
 export const localizationApi = createApi({
   reducerPath: 'localizationApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'localization/',
+    baseUrl: '/localization/',
   }),
   endpoints: (builder) => ({
     getTranslation: builder.query<any, Languages>({

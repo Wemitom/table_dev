@@ -12,6 +12,7 @@ import storage from 'redux-persist/lib/storage';
 
 import { authApi } from './api/authApi';
 import { localizationApi } from './api/localizationApi';
+import { reservateTableApi } from './api/reservateTableApi';
 import authReducer from './slices/authSlice';
 import localizationReducer from './slices/localizeSlice';
 import versionSlice from './slices/versionSlice';
@@ -49,13 +50,18 @@ export const store = configureStore({
     version: persistedReducerVersion,
     [authApi.reducerPath]: authApi.reducer,
     [localizationApi.reducerPath]: localizationApi.reducer,
+    [reservateTableApi.reducerPath]: reservateTableApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(authApi.middleware, localizationApi.middleware),
+    }).concat(
+      authApi.middleware,
+      localizationApi.middleware,
+      reservateTableApi.middleware
+    ),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

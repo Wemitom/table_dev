@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 import axios, { AxiosResponse } from 'axios';
 import { throttle } from 'lodash';
+import { useNavigate } from 'react-router-dom';
 import SimpleBar from 'simplebar-react';
 
 import useLocalization from '../../hooks/useLocalization';
@@ -22,6 +23,7 @@ const SearchBar = () => {
   >([]);
   const [loading, setLoading] = useState(false);
   const { t } = useLocalization();
+  const navigate = useNavigate();
 
   const fetch = useMemo(
     () =>
@@ -68,7 +70,10 @@ const SearchBar = () => {
   useOutsideClickDetect(wrapper, () => setOptionsExpanded(false));
 
   return (
-    <form className="header__search" action="#">
+    <form
+      className="header__search"
+      onSubmit={() => navigate(`restaurant/${searchQuery}`)}
+    >
       <button className="header__btn btn-reset">
         <span className="visually-hidden">{t.searchButton}</span>
       </button>

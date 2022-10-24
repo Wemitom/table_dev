@@ -359,6 +359,7 @@ p {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin-left: auto;
 }
 .menu__item:not(:last-child) {
   margin-right: 40px;
@@ -455,6 +456,12 @@ p {
   padding: 18px 61px;
   color: #fff;
   background-color: #282828;
+  border-radius: 30px;
+}
+.main-btn--disabled {
+  padding: 18px 61px;
+  color: lightgray;
+  background-color: gray;
   border-radius: 30px;
 }
 .main-btn:hover {
@@ -661,7 +668,6 @@ p {
   }
 }
 .header__logo {
-  margin-right: auto;
   -webkit-transition: opacity 0.2s;
   -o-transition: opacity 0.2s;
   transition: opacity 0.2s;
@@ -1639,6 +1645,9 @@ p {
   color: #909090;
   margin-bottom: 40px;
 }
+.reservation-table__scheme {
+  position: relative;
+}
 .reservation-table__box {
   -webkit-box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.05);
   box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.05);
@@ -1656,19 +1665,24 @@ p {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
+  margin-bottom: 2%;
 }
 .reservation-table__form .form-group--date {
-  max-width: 204px;
+  max-width: 230px;
 }
 .reservation-table__form .form-group--time {
-  max-width: 217px;
+  max-width: 245px;
 }
 .reservation-table__form .form-group--quantity {
-  max-width: 283px;
+  max-width: 274px;
+}
+.reservation-table__form .form-group--len {
+  max-width: 322px;
 }
 .reservation-table__form .form-group--date,
 .reservation-table__form .form-group--quantity,
-.reservation-table__form .form-group--time {
+.reservation-table__form .form-group--time,
+.reservation-table__form .form-group--len {
   width: 100%;
 }
 .reservation-table__form .dropdown {
@@ -1754,7 +1768,7 @@ p {
   margin: 0 auto;
 }
 .table-time {
-  position: fixed;
+  position: absolute;
   overflow: hidden;
   font-size: 14px;
   border: 1px solid #909090;
@@ -1824,6 +1838,43 @@ p {
   .booking-status__wrapper {
     padding-top: 70px;
   }
+
+  .reservation-table__form .form-group--date {
+    max-width: 322px;
+    margin-top: 5%;
+  }
+  .reservation-table__form .form-group--time {
+    max-width: 322px;
+  }
+  .reservation-table__form .form-group--quantity {
+    max-width: 322px;
+  }
+  .reservation-table__form .form-group--len {
+    margin-bottom: 5%;
+  }
+
+  .reservation-table__form {
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+  }
+  .reservation-table__box {
+    width: auto;
+    height: auto;
+    overflow: unset;
+  }
+  .reservation-table__hall {
+    width: 100%;
+    height: auto;
+  }
+  .reservation-table__zoom {
+    display: none;
+  }
+
+  .table-time__list {
+    width: 200px;
+    height: 160px;
+  }
 }
 .booking-status__inner {
   text-align: left;
@@ -1841,6 +1892,10 @@ p {
   box-shadow: 0 1px 20px 5px rgba(0, 0, 0, 0.05);
   border-radius: 20px;
   margin-bottom: 40px;
+}
+.header__input::placeholder {
+  font-size: 0.8em;
+  text-align: center;
 }
 @media (max-width: 414px) {
   .booking-status {
@@ -3197,4 +3252,10 @@ p {
 
 .input--disabled {
   background-color: rgba(40, 40, 40, 0.25);
+}
+
+#root-portal {
+  clear: both;
+  height: 0;
+  width: 0;
 }

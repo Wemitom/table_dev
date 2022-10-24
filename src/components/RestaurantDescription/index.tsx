@@ -46,12 +46,6 @@ const RestaurantDescription = () => {
             Меню
           </button>
         </div>
-        <button
-          className="local-restaurant__btn btn-reset main-btn"
-          type="button"
-        >
-          Забронировать
-        </button>
       </div>
     </section>
   );

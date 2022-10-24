@@ -7,7 +7,6 @@ const ForPartnersPage = () => {
       <div className="content">
         <ForPartners />
       </div>
-      <Footer />
     </>
   );
 };

@@ -26,9 +26,9 @@ import './ChooseRestaurant.css';
 
 const ChooseRestaurant = () => {
   const initState = {
-    area: 'ЦАО',
-    street: 'ул. Маросейка',
-    cuisine: [],
+    area: { label: 'ЦАО', value: 'cao' },
+    street: { label: 'ул. Маросейка', value: 'maros' },
+    cuisine: { label: [], value: [] },
   };
   const initStateMap = {
     center: [55.75, 37.57],
@@ -42,21 +42,21 @@ const ChooseRestaurant = () => {
     switch (action.type) {
       case 'AREA':
         return {
-          area: action.payload as string,
+          area: action.payload,
           street: state.street,
           cuisine: state.cuisine,
         };
       case 'STREET':
         return {
           area: state.area,
-          street: action.payload as string,
+          street: action.payload,
           cuisine: state.cuisine,
         };
       case 'CUISINE':
         return {
           area: state.area,
           street: state.street,
-          cuisine: action.payload as string[],
+          cuisine: action.payload,
         };
       default:
         throw new Error();
@@ -81,9 +81,9 @@ const ChooseRestaurant = () => {
   ) => {
     axios
       .post(`/api/v1/search/search_location`, {
-        district: request.area,
+        district: request.area.value,
         limit: 5,
-        cuisine: request.cuisine,
+        cuisine: request.cuisine.value,
       })
       .then(callback);
   };
@@ -187,12 +187,12 @@ const ChooseRestaurant = () => {
                     })
                   }
                   options={[
-                    'басманный',
-                    'замоскворечье',
-                    'Арбат',
-                    'khamov',
-                    'taganka',
-                    'tver',
+                    { label: 'Басманный', value: 'basm' },
+                    { label: 'Замоскворечье', value: 'zamosk' },
+                    { label: 'Арбат', value: 'arbat' },
+                    { label: 'Хамовники', value: 'khamov' },
+                    { label: 'Таганская', value: 'taganka' },
+                    { label: 'Тверская', value: 'tver' },
                   ]}
                 />
               </div>
@@ -207,10 +207,10 @@ const ChooseRestaurant = () => {
                     })
                   }
                   options={[
-                    'ул. Маросейка',
-                    'Новая',
-                    'Покровский б-р',
-                    'ул. Ильинка',
+                    { label: 'ул. Маросейка', value: 'maros' },
+                    { label: 'Новая', value: 'nov' },
+                    { label: 'Покровский б-р', value: 'pokr' },
+                    { label: 'ул. Ильинка', value: 'ilyin' },
                   ]}
                 />
               </div>
@@ -226,11 +226,11 @@ const ChooseRestaurant = () => {
                     })
                   }
                   options={[
-                    'Японская',
-                    'Итальянская',
-                    'Средиземноморская',
-                    'Французская',
-                    'mix',
+                    { label: 'Японская', value: 'japanese' },
+                    { label: 'Итальянская', value: 'italian' },
+                    { label: 'Средиземноморская', value: 'mediterranean' },
+                    { label: 'Французская', value: 'french' },
+                    { label: 'Смешанная', value: 'mix' },
                   ]}
                 />
               </div>

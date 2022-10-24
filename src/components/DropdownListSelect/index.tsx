@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import SimpleBar from 'simplebar-react';
 
 import useOutsideClickDetect from '../../hooks/useOutsideClickDetect';
+import { option } from '../ChooseRestaurant/interfaces';
 
 const DropdownListSelect = ({
   values,
@@ -10,10 +11,10 @@ const DropdownListSelect = ({
   setValues,
   options,
 }: {
-  values: string[];
+  values: option;
   placeholder: string;
-  setValues: (values: string[]) => void;
-  options: string[];
+  setValues: (values: option) => void;
+  options: option[];
 }) => {
   const [expanded, setExpanded] = useState(false);
   const wrapper = useRef(null);
@@ -27,7 +28,9 @@ const DropdownListSelect = ({
         }`}
         onClick={() => setExpanded(!expanded)}
       >
-        {values.length ? values.join(', ') : placeholder}
+        {(values.label as string[]).length
+          ? (values.label as string[]).join(', ')
+          : placeholder}
       </button>
       <ul
         className={`dropdown__list list-reset${
@@ -43,21 +46,43 @@ const DropdownListSelect = ({
         >
           {options.map((option) => (
             <li
-              key={option}
+              key={option.value!.toString()}
               className="dropdown__list-item"
               data-value="travel"
               onClick={() => {
-                if (!values.includes(option)) {
-                  setValues([...values, option]);
+                if (
+                  !(values.value as string[]).includes(option.value as string)
+                ) {
+                  setValues({
+                    label: [
+                      ...(values.label as string[]),
+                      option.label as string,
+                    ],
+                    value: [
+                      ...(values.value as string[]),
+                      option.value as string,
+                    ],
+                  });
                 } else {
-                  setValues([...values.filter((value) => value !== option)]);
+                  setValues({
+                    label: (values.label as string[]).filter(
+                      (val) => val !== option.label
+                    ),
+                    value: (values.value as string[]).filter(
+                      (val) => val !== option.value
+                    ),
+                  });
                 }
               }}
               style={{
-                background: values.includes(option) ? 'grey' : undefined,
+                background: (values.value as string[]).includes(
+                  option.value as string
+                )
+                  ? 'grey'
+                  : undefined,
               }}
             >
-              {option}
+              {option.label}
             </li>
           ))}
         </SimpleBar>
